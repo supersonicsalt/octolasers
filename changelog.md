@@ -7,6 +7,7 @@
 * updated featureBoard.md with priority indicators
 * added deviceCouchVersus
 	* 
+added README.md and uploaded to github
 > any version below here were not properly logged in here, but there isnt much use case for these logs
 #### version 0.0.menuUpdate.1
 * added main menu
