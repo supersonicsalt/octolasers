@@ -1,0 +1,57 @@
+[gd_scene load_steps=6 format=3 uid="uid://cy0ttrf4b1kvk"]
+
+[ext_resource type="Script" uid="uid://dxmi3wyamvexs" path="res://scripts/puzzle_menu.gd" id="1_cnr6j"]
+[ext_resource type="Texture2D" uid="uid://dldufaeejm5ls" path="res://textures/menu/temp menu/background.png" id="1_svhiu"]
+[ext_resource type="Texture2D" uid="uid://d0i7ooo41r8s2" path="res://textures/menu/title.png" id="2_cu5rm"]
+[ext_resource type="Texture2D" uid="uid://d5sf8n5b050g" path="res://textures/menu/exit.png" id="3_bwdh0"]
+[ext_resource type="Texture2D" uid="uid://dvnl4yiifhb1f" path="res://textures/menu/settings.png" id="4_lgevt"]
+
+[node name="puzzleMenu" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_cnr6j")
+
+[node name="background" type="TextureRect" parent="."]
+offset_right = 320.0
+offset_bottom = 180.0
+texture = ExtResource("1_svhiu")
+
+[node name="title" type="TextureRect" parent="."]
+offset_left = 94.0
+offset_top = 10.0
+offset_right = 160.0
+offset_bottom = 34.0
+scale = Vector2(2, 2)
+texture = ExtResource("2_cu5rm")
+expand_mode = 1
+stretch_mode = 2
+
+[node name="exit" type="TextureButton" parent="."]
+offset_left = 50.0
+offset_top = 10.0
+offset_right = 62.0
+offset_bottom = 22.0
+scale = Vector2(2, 2)
+texture_normal = ExtResource("3_bwdh0")
+
+[node name="options" type="TextureButton" parent="."]
+offset_left = 246.0
+offset_top = 10.0
+offset_right = 258.0
+offset_bottom = 22.0
+scale = Vector2(2, 2)
+texture_normal = ExtResource("4_lgevt")
+
+[node name="TextureButton" type="TextureButton" parent="."]
+offset_left = 87.0
+offset_top = 82.0
+offset_right = 127.0
+offset_bottom = 122.0
+
+[node name="level" type="TextureButton" parent="."]
+offset_left = 87.0
+offset_top = 82.0
+offset_right = 127.0
+offset_bottom = 122.0
+
+[connection signal="pressed" from="exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="options" to="." method="_on_options_pressed"]

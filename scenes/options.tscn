@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://dl04ojg0tc4a8"]
+
+[ext_resource type="Script" uid="uid://ddri8pdmyq0vt" path="res://scripts/options.gd" id="1_2iy26"]
+[ext_resource type="Texture2D" uid="uid://dldufaeejm5ls" path="res://textures/menu/temp menu/background.png" id="1_xcdss"]
+[ext_resource type="Texture2D" uid="uid://d5sf8n5b050g" path="res://textures/menu/exit.png" id="2_rai8d"]
+
+[node name="options" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_2iy26")
+
+[node name="background" type="TextureRect" parent="."]
+texture_filter = 1
+offset_right = 320.0
+offset_bottom = 180.0
+texture = ExtResource("1_xcdss")
+
+[node name="exit" type="TextureButton" parent="."]
+offset_left = 50.0
+offset_top = 10.0
+offset_right = 62.0
+offset_bottom = 22.0
+scale = Vector2(2, 2)
+texture_normal = ExtResource("2_rai8d")
+
+[connection signal="pressed" from="exit" to="." method="_on_exit_pressed"]

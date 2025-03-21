@@ -1,0 +1,106 @@
+[gd_scene load_steps=10 format=3 uid="uid://br2385tir356m"]
+
+[ext_resource type="Script" uid="uid://drox0lsltb7dy" path="res://scripts/device_couch.gd" id="1_jgu7k"]
+[ext_resource type="Texture2D" uid="uid://dldufaeejm5ls" path="res://textures/menu/temp menu/background.png" id="2_7a3ay"]
+[ext_resource type="TileSet" uid="uid://dwu2d4uw1j60f" path="res://tileset/boardTiles.tres" id="3_cf3up"]
+[ext_resource type="Script" uid="uid://commmqhkd3wrb" path="res://scenes/board_tiles_device_couch.gd" id="4_jgu7k"]
+[ext_resource type="TileSet" uid="uid://oja1d7v6vtdw" path="res://tileset/octodotsTiles.tres" id="5_0w70m"]
+[ext_resource type="Script" uid="uid://dof7pcwsoax2c" path="res://scripts/octodot_interaction.gd" id="6_25mj1"]
+[ext_resource type="TileSet" uid="uid://c6cg8y31lsngs" path="res://tileset/laserTiles.tres" id="7_a00sy"]
+[ext_resource type="Script" uid="uid://dpuwjh7ql3rxo" path="res://scripts/laser_interaction.gd" id="8_pqalj"]
+[ext_resource type="Texture2D" uid="uid://d5sf8n5b050g" path="res://textures/menu/exit.png" id="9_5daev"]
+
+[node name="deviceCouch" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_jgu7k")
+
+[node name="background" type="TextureRect" parent="."]
+texture_filter = 1
+offset_right = 320.0
+offset_bottom = 180.0
+texture = ExtResource("2_7a3ay")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 34.0
+offset_top = 49.0
+offset_right = 238.0
+offset_bottom = 169.0
+
+[node name="BoardTiles" type="TileMapLayer" parent="Control"]
+texture_filter = 1
+position = Vector2(102, 60)
+tile_set = ExtResource("3_cf3up")
+script = ExtResource("4_jgu7k")
+
+[node name="OctodotTiles" type="TileMapLayer" parent="Control"]
+texture_filter = 1
+position = Vector2(102, 60)
+tile_set = ExtResource("5_0w70m")
+script = ExtResource("6_25mj1")
+
+[node name="LaserTiles" type="TileMapLayer" parent="Control"]
+position = Vector2(102, 60)
+tile_set = ExtResource("7_a00sy")
+script = ExtResource("8_pqalj")
+
+[node name="heightText" type="TextEdit" parent="."]
+clip_contents = false
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 80.0
+offset_bottom = 50.0
+scale = Vector2(0.5, 0.5)
+tooltip_text = "height"
+text = "height"
+editable = false
+
+[node name="heightInput" type="TextEdit" parent="."]
+clip_contents = false
+offset_left = 45.0
+offset_top = 10.0
+offset_right = 95.0
+offset_bottom = 50.0
+scale = Vector2(0.5, 0.5)
+tooltip_text = "height"
+
+[node name="widthText" type="TextEdit" parent="."]
+clip_contents = false
+offset_left = 10.0
+offset_top = 30.0
+offset_right = 80.0
+offset_bottom = 70.0
+scale = Vector2(0.5, 0.5)
+tooltip_text = "height"
+text = "width"
+editable = false
+
+[node name="widthInput" type="TextEdit" parent="."]
+clip_contents = false
+offset_left = 45.0
+offset_top = 30.0
+offset_right = 95.0
+offset_bottom = 70.0
+scale = Vector2(0.5, 0.5)
+tooltip_text = "height"
+
+[node name="logText" type="TextEdit" parent="."]
+offset_left = 238.0
+offset_top = 10.0
+offset_right = 408.0
+offset_bottom = 410.0
+scale = Vector2(0.4, 0.4)
+editable = false
+wrap_mode = 1
+
+[node name="exit" type="TextureButton" parent="."]
+offset_left = 10.0
+offset_top = 146.0
+offset_right = 22.0
+offset_bottom = 158.0
+scale = Vector2(2, 2)
+texture_normal = ExtResource("9_5daev")
+
+[connection signal="text_changed" from="heightInput" to="Control/BoardTiles" method="_on_input_text_changed"]
+[connection signal="text_changed" from="widthInput" to="Control/BoardTiles" method="_on_input_text_changed"]
