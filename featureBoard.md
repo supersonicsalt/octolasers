@@ -17,11 +17,6 @@
 	* fix log
 	* fix arrows not red on laser
 	* implement notation mode (confirm with executive director)
-		* add wall notation
-		* add entrance and exit notation
-		* add laser notation
-		* add groups
-		* add hoverability for groups
 * online
 	* lobbies
 		* fill with bots
@@ -37,11 +32,26 @@
 * tutorial
 * given dots and entries: find end
 * given single lazer with amount of dots: find configuration that works
+* notation sandbox (priority)
+	* add dot notation
+	* add non dot notation
+		* have the ability to fill rectangular areas
+	* add entrance and exit notation
+		* color arrows with the corresponding laser color
+		* have the option of being notated with text
+	* add laser notation
+		* add color swatch
+		* behave like colored terraria wire
+			* add 1 connection laser tile
+			* add 3 connection laser tile
+		* add smartlaser system which picks the best laser out of the points placed (eventually)
+			* add ability to overide or disable
 ## leaderboard options (found in random puzzle mode)
 * display statistics
 * participate in leaderboard
 ## options
 * fullscreen/windowed/borderless
+boxes have cycling s
 * accessibility
 	* colorblind mode
 	* ui size

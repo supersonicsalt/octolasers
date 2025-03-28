@@ -38,9 +38,9 @@ func _on_input_text_changed() -> void:
 	width = $"../../widthInput".text.to_int()
 	offset = $"../../offsetInput".text.to_int()
 	#lower limits
-	if height <= 0:
+	if height <= 0 || height >= 100:
 		height = 12
-	if width <= 0:
+	if width <= 0 || width >= 100:
 		width = 12
 	offset = abs(offset)
 	#offset map to center
