@@ -20,4 +20,4 @@ func _on_options_pressed() -> void:
 
 
 func _on_couch_device_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/deviceVersus.tscn")
+	get_tree().change_scene_to_file("res://scenes/deviceCouch.tscn")

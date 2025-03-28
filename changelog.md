@@ -6,8 +6,11 @@
 * renamed featureBoard.ftbd to featureBoard.md
 * updated featureBoard.md with priority indicators
 * added deviceCouchVersus
-	* 
-added README.md and uploaded to github
+	* duplicated sandbox mode and tweaked the board generating script to generate 2 instead
+	* tweaked laser and octodot scripts to fit
+	* fixed and optimized the hovering system
+* added README.md and uploaded to github
+* ZGlzYWJsZWQgc3RvcnkgbW9kZQo=
 > any version below here were not properly logged in here, but there isnt much use case for these logs
 #### version 0.0.menuUpdate.1
 * added main menu

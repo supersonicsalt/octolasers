@@ -14,6 +14,14 @@
 			* load preset
 ## versus
 * device to device versus (priority)
+	* fix log
+	* fix arrows not red on laser
+	* implement notation mode (confirm with executive director)
+		* add wall notation
+		* add entrance and exit notation
+		* add laser notation
+		* add groups
+		* add hoverability for groups
 * online
 	* lobbies
 		* fill with bots
@@ -41,8 +49,12 @@
 	* haptics
 	* press delay
 	* simplify grid
+## c3Rvcnk=
+* YWRkIGxvY2tz
+* cmV3YXJkIHBsYXllcnMgZm9yIGJlYXRpbmcgcHV6emxlcw==
 ## misc
 * add keboard controls ?gamepad?
 * add fullscreen
 * test simultanious actions
 * Allow play in both landscape and portrait
+* update readme (consult executive director)

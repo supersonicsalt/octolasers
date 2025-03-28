@@ -33,7 +33,7 @@ func _input(event):
 				direction = 3
 			var laserExit = drawLaser(laserStart, direction)
 			var startText = entranceToText(laserStart)
-			var exitText = entranceToText(Vector2i(laserExit.y, laserExit.z))
+			var exitText = entranceToText(laserExit)
 			if exitText == "-1":
 				exitText = startText
 			if !$"../../logText".text.contains(startText + "-" + exitText) && !$"../../logText".text.contains(exitText + "-" + startText):
@@ -376,4 +376,4 @@ func drawLaser(start:Vector2i, direction):
 				start.y -= 1
 		if $"../BoardTiles".get_cell_source_id(start) == 0:
 			inProgress = false
-	return	Vector3i(direction, start.x, start.y)
+	return	Vector2i(start.x, start.y)

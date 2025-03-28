@@ -20,7 +20,7 @@ offset_right = 320.0
 offset_bottom = 180.0
 texture = ExtResource("1_j0qm7")
 
-[node name="Control2" type="Control" parent="."]
+[node name="tileMaps" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 34.0
@@ -28,19 +28,19 @@ offset_top = 49.0
 offset_right = 238.0
 offset_bottom = 169.0
 
-[node name="BoardTiles" type="TileMapLayer" parent="Control2"]
+[node name="BoardTiles" type="TileMapLayer" parent="tileMaps"]
 texture_filter = 1
 position = Vector2(102, 60)
 tile_set = ExtResource("2_jn5yb")
 script = ExtResource("3_dkeaa")
 
-[node name="OctodotTiles" type="TileMapLayer" parent="Control2"]
+[node name="OctodotTiles" type="TileMapLayer" parent="tileMaps"]
 texture_filter = 1
 position = Vector2(102, 60)
 tile_set = ExtResource("3_kf0dj")
 script = ExtResource("5_swjod")
 
-[node name="LaserTiles" type="TileMapLayer" parent="Control2"]
+[node name="LaserTiles" type="TileMapLayer" parent="tileMaps"]
 position = Vector2(102, 60)
 tile_set = ExtResource("6_3eikl")
 script = ExtResource("7_yoyod")
@@ -102,6 +102,6 @@ offset_bottom = 158.0
 scale = Vector2(2, 2)
 texture_normal = ExtResource("10_nbrlj")
 
-[connection signal="text_changed" from="heightInput" to="Control2/BoardTiles" method="_on_input_text_changed"]
-[connection signal="text_changed" from="widthInput" to="Control2/BoardTiles" method="_on_input_text_changed"]
+[connection signal="text_changed" from="heightInput" to="tileMaps/BoardTiles" method="_on_input_text_changed"]
+[connection signal="text_changed" from="widthInput" to="tileMaps/BoardTiles" method="_on_input_text_changed"]
 [connection signal="pressed" from="exit" to="." method="_on_exit_pressed"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://debubx8b778lg"]
+[gd_scene load_steps=11 format=3 uid="uid://debubx8b778lg"]
 
 [ext_resource type="Texture2D" uid="uid://dldufaeejm5ls" path="res://textures/menu/temp menu/background.png" id="1_qtm7j"]
 [ext_resource type="Script" uid="uid://b4xs56ctl83j5" path="res://scripts/menu.gd" id="1_rs4fd"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://dvnl4yiifhb1f" path="res://textures/menu/settings.png" id="7_2j00d"]
 [ext_resource type="Texture2D" uid="uid://d3d6vfoc6ohc3" path="res://textures/menu/story.png" id="8_tafm8"]
 [ext_resource type="Texture2D" uid="uid://dtd4cqoy66h2v" path="res://textures/menu/versus.png" id="9_7efkl"]
+[ext_resource type="Texture2D" uid="uid://d2qsi2ju5t7ty" path="res://textures/empty.png" id="9_70i5f"]
 
 [node name="menu" type="Node2D"]
 texture_filter = 1
@@ -67,7 +68,9 @@ offset_top = 68.0
 offset_right = 160.0
 offset_bottom = 80.0
 scale = Vector2(2, 2)
+disabled = true
 texture_normal = ExtResource("8_tafm8")
+texture_disabled = ExtResource("9_70i5f")
 
 [node name="versus" type="TextureButton" parent="."]
 offset_left = 119.0
