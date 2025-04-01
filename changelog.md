@@ -10,6 +10,10 @@
 	* tweaked laser and octodot scripts to fit
 	* fixed and optimized the hovering system
 * added README.md and uploaded to github
+* added notation sandbox (not functional)
+	* added tiles and color selection textures
+* added debug scene
+	* made a graph from scratch
 * ZGlzYWJsZWQgc3RvcnkgbW9kZQo=
 > any version below here were not properly logged in here, but there isnt much use case for these logs
 #### version 0.0.menuUpdate.1

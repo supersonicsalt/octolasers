@@ -64,6 +64,7 @@ boxes have cycling s
 * cmV3YXJkIHBsYXllcnMgZm9yIGJlYXRpbmcgcHV6emxlcw==
 ## misc
 * add keboard controls ?gamepad?
+* add midi controls
 * add fullscreen
 * test simultanious actions
 * Allow play in both landscape and portrait

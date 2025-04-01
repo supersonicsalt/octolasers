@@ -1,13 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://de2h46u4bnv3y"]
+[gd_scene load_steps=8 format=3 uid="uid://de2h46u4bnv3y"]
 
-[ext_resource type="Script" uid="uid://dk0233py8sabj" path="res://scenes/notationSandbox.gd" id="1_et8iy"]
+[ext_resource type="Script" uid="uid://dk0233py8sabj" path="res://scripts/notationSandbox.gd" id="1_et8iy"]
 [ext_resource type="Texture2D" uid="uid://dldufaeejm5ls" path="res://textures/menu/temp menu/background.png" id="2_cwa57"]
 [ext_resource type="TileSet" uid="uid://dwu2d4uw1j60f" path="res://tileset/boardTiles.tres" id="3_wbpig"]
-[ext_resource type="Script" uid="uid://3in0vx5okame" path="res://scripts/board_interaction.gd" id="4_8nkls"]
-[ext_resource type="TileSet" uid="uid://oja1d7v6vtdw" path="res://tileset/octodotsTiles.tres" id="5_102u1"]
-[ext_resource type="Script" uid="uid://dof7pcwsoax2c" path="res://scripts/octodot_interaction.gd" id="6_w5gdl"]
-[ext_resource type="TileSet" uid="uid://c6cg8y31lsngs" path="res://tileset/laserTiles.tres" id="7_cxur5"]
-[ext_resource type="Script" uid="uid://dpuwjh7ql3rxo" path="res://scripts/laser_interaction.gd" id="8_qf8sc"]
+[ext_resource type="Script" uid="uid://3iya16mys85e" path="res://scripts/board_tiles_notation.gd" id="4_a2xd8"]
+[ext_resource type="Texture2D" uid="uid://snnwpuiofvk2" path="res://textures/menu/selectPencil.png" id="6_5mvsv"]
+[ext_resource type="Texture2D" uid="uid://3fhl3bh0uto2" path="res://textures/menu/customizePencil.png" id="6_aerid"]
 [ext_resource type="Texture2D" uid="uid://d5sf8n5b050g" path="res://textures/menu/exit.png" id="9_mbdul"]
 
 [node name="notationSandbox" type="Node2D"]
@@ -32,18 +30,7 @@ offset_bottom = 169.0
 texture_filter = 1
 position = Vector2(102, 60)
 tile_set = ExtResource("3_wbpig")
-script = ExtResource("4_8nkls")
-
-[node name="OctodotTiles" type="TileMapLayer" parent="tileMaps"]
-texture_filter = 1
-position = Vector2(102, 60)
-tile_set = ExtResource("5_102u1")
-script = ExtResource("6_w5gdl")
-
-[node name="LaserTiles" type="TileMapLayer" parent="tileMaps"]
-position = Vector2(102, 60)
-tile_set = ExtResource("7_cxur5")
-script = ExtResource("8_qf8sc")
+script = ExtResource("4_a2xd8")
 
 [node name="heightText" type="TextEdit" parent="."]
 clip_contents = false
@@ -87,9 +74,9 @@ tooltip_text = "height"
 
 [node name="logText" type="TextEdit" parent="."]
 offset_left = 238.0
-offset_top = 10.0
+offset_top = 61.0
 offset_right = 408.0
-offset_bottom = 410.0
+offset_bottom = 334.0
 scale = Vector2(0.4, 0.4)
 editable = false
 wrap_mode = 1
@@ -101,6 +88,243 @@ offset_right = 22.0
 offset_bottom = 158.0
 scale = Vector2(2, 2)
 texture_normal = ExtResource("9_mbdul")
+
+[node name="ItemList" type="ItemList" parent="."]
+offset_left = 71.0
+offset_top = 10.0
+offset_right = 237.0
+offset_bottom = 50.0
+
+[node name="ColorRect1" type="ColorRect" parent="ItemList"]
+layout_mode = 0
+offset_right = 20.0
+offset_bottom = 20.0
+
+[node name="selectRect" type="TextureRect" parent="ItemList/ColorRect1"]
+visible = false
+layout_mode = 0
+offset_right = 20.0
+offset_bottom = 20.0
+texture = ExtResource("6_5mvsv")
+
+[node name="ColorRect2" type="ColorRect" parent="ItemList"]
+offset_top = 20.0
+offset_right = 20.0
+offset_bottom = 40.0
+color = Color(1, 1, 0, 1)
+
+[node name="selectRect" type="TextureRect" parent="ItemList/ColorRect2"]
+visible = false
+offset_right = 20.0
+offset_bottom = 20.0
+texture = ExtResource("6_5mvsv")
+
+[node name="ColorRect3" type="ColorRect" parent="ItemList"]
+offset_left = 20.0
+offset_right = 40.0
+offset_bottom = 20.0
+color = Color(1, 0, 1, 1)
+
+[node name="selectRect" type="TextureRect" parent="ItemList/ColorRect3"]
+visible = false
+offset_right = 20.0
+offset_bottom = 20.0
+texture = ExtResource("6_5mvsv")
+
+[node name="ColorRect4" type="ColorRect" parent="ItemList"]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0, 1, 1, 1)
+
+[node name="selectRect" type="TextureRect" parent="ItemList/ColorRect4"]
+visible = false
+offset_right = 20.0
+offset_bottom = 20.0
+texture = ExtResource("6_5mvsv")
+
+[node name="ColorRect5" type="ColorRect" parent="ItemList"]
+offset_left = 40.0
+offset_right = 60.0
+offset_bottom = 20.0
+color = Color(0, 0, 1, 1)
+
+[node name="selectRect" type="TextureRect" parent="ItemList/ColorRect5"]
+offset_right = 20.0
+offset_bottom = 20.0
+texture = ExtResource("6_5mvsv")
+
+[node name="ColorRect6" type="ColorRect" parent="ItemList"]
+offset_left = 40.0
+offset_top = 20.0
+offset_right = 60.0
+offset_bottom = 40.0
+color = Color(0, 1, 0, 1)
+
+[node name="selectRect" type="TextureRect" parent="ItemList/ColorRect6"]
+visible = false
+offset_right = 20.0
+offset_bottom = 20.0
+texture = ExtResource("6_5mvsv")
+
+[node name="ColorRect7" type="ColorRect" parent="ItemList"]
+offset_left = 60.0
+offset_right = 80.0
+offset_bottom = 20.0
+color = Color(1, 0, 0, 1)
+
+[node name="selectRect" type="TextureRect" parent="ItemList/ColorRect7"]
+visible = false
+offset_right = 20.0
+offset_bottom = 20.0
+texture = ExtResource("6_5mvsv")
+
+[node name="ColorRect8" type="ColorRect" parent="ItemList"]
+offset_left = 60.0
+offset_top = 20.0
+offset_right = 80.0
+offset_bottom = 40.0
+color = Color(0, 0, 0, 1)
+
+[node name="selectRect" type="TextureRect" parent="ItemList/ColorRect8"]
+visible = false
+offset_right = 20.0
+offset_bottom = 20.0
+texture = ExtResource("6_5mvsv")
+
+[node name="ColorRect9" type="ColorRect" parent="ItemList"]
+offset_left = 80.0
+offset_right = 100.0
+offset_bottom = 20.0
+color = Color(1, 0.498039, 0, 1)
+
+[node name="selectRect" type="TextureRect" parent="ItemList/ColorRect9"]
+visible = false
+offset_right = 20.0
+offset_bottom = 20.0
+texture = ExtResource("6_5mvsv")
+
+[node name="ColorRect10" type="ColorRect" parent="ItemList"]
+offset_left = 80.0
+offset_top = 20.0
+offset_right = 100.0
+offset_bottom = 40.0
+color = Color(0, 0.498039, 1, 1)
+
+[node name="selectRect" type="TextureRect" parent="ItemList/ColorRect10"]
+visible = false
+offset_right = 20.0
+offset_bottom = 20.0
+texture = ExtResource("6_5mvsv")
+
+[node name="ColorRect11" type="ColorRect" parent="ItemList"]
+offset_left = 100.0
+offset_right = 120.0
+offset_bottom = 20.0
+color = Color(0.498039, 0, 1, 1)
+
+[node name="selectRect" type="TextureRect" parent="ItemList/ColorRect11"]
+visible = false
+offset_right = 20.0
+offset_bottom = 20.0
+texture = ExtResource("6_5mvsv")
+
+[node name="ColorRect12" type="ColorRect" parent="ItemList"]
+offset_left = 100.0
+offset_top = 20.0
+offset_right = 120.0
+offset_bottom = 40.0
+color = Color(1, 0, 0.498039, 1)
+
+[node name="selectRect" type="TextureRect" parent="ItemList/ColorRect12"]
+visible = false
+offset_right = 20.0
+offset_bottom = 20.0
+texture = ExtResource("6_5mvsv")
+
+[node name="ColorRect13" type="ColorRect" parent="ItemList"]
+offset_left = 120.0
+offset_right = 140.0
+offset_bottom = 20.0
+color = Color(0.498039, 0.498039, 0.498039, 1)
+
+[node name="customizeRect" type="TextureRect" parent="ItemList/ColorRect13"]
+layout_mode = 0
+offset_right = 20.0
+offset_bottom = 20.0
+texture = ExtResource("6_aerid")
+
+[node name="selectRect" type="TextureRect" parent="ItemList/ColorRect13"]
+visible = false
+offset_right = 20.0
+offset_bottom = 20.0
+texture = ExtResource("6_5mvsv")
+
+[node name="ColorRect14" type="ColorRect" parent="ItemList"]
+offset_left = 120.0
+offset_top = 20.0
+offset_right = 140.0
+offset_bottom = 40.0
+color = Color(0.498039, 0.498039, 0.498039, 1)
+
+[node name="customizeRect" type="TextureRect" parent="ItemList/ColorRect14"]
+layout_mode = 0
+offset_right = 20.0
+offset_bottom = 20.0
+texture = ExtResource("6_aerid")
+
+[node name="selectRect" type="TextureRect" parent="ItemList/ColorRect14"]
+offset_right = 20.0
+offset_bottom = 20.0
+texture = ExtResource("6_5mvsv")
+
+[node name="ColorRect15" type="ColorRect" parent="ItemList"]
+offset_left = 140.0
+offset_right = 160.0
+offset_bottom = 20.0
+color = Color(0.498039, 0.498039, 0.498039, 1)
+
+[node name="customizeRect" type="TextureRect" parent="ItemList/ColorRect15"]
+layout_mode = 0
+offset_right = 20.0
+offset_bottom = 20.0
+texture = ExtResource("6_aerid")
+
+[node name="selectRect" type="TextureRect" parent="ItemList/ColorRect15"]
+visible = false
+offset_right = 20.0
+offset_bottom = 20.0
+texture = ExtResource("6_5mvsv")
+
+[node name="ColorRect16" type="ColorRect" parent="ItemList"]
+offset_left = 140.0
+offset_top = 20.0
+offset_right = 160.0
+offset_bottom = 40.0
+color = Color(0.498039, 0.498039, 0.498039, 1)
+
+[node name="customizeRect" type="TextureRect" parent="ItemList/ColorRect16"]
+layout_mode = 0
+offset_right = 20.0
+offset_bottom = 20.0
+texture = ExtResource("6_aerid")
+
+[node name="selectRect" type="TextureRect" parent="ItemList/ColorRect16"]
+visible = false
+offset_right = 20.0
+offset_bottom = 20.0
+texture = ExtResource("6_5mvsv")
+
+[node name="ColorPicker" type="ColorPicker" parent="."]
+offset_left = 238.0
+offset_top = 9.99999
+offset_right = 677.0
+offset_bottom = 337.0
+scale = Vector2(0.155, 0.155)
+color_modes_visible = false
+sliders_visible = false
+presets_visible = false
 
 [connection signal="text_changed" from="heightInput" to="tileMaps/BoardTiles" method="_on_input_text_changed"]
 [connection signal="text_changed" from="widthInput" to="tileMaps/BoardTiles" method="_on_input_text_changed"]
