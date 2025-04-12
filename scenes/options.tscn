@@ -22,4 +22,9 @@ offset_bottom = 22.0
 scale = Vector2(2, 2)
 texture_normal = ExtResource("2_rai8d")
 
+[node name="debug button" type="TextureButton" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
 [connection signal="pressed" from="exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="debug button" to="." method="_on_debug_button_pressed"]

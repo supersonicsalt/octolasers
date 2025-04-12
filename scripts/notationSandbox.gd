@@ -6,11 +6,6 @@ func _ready() -> void:
 	$"widthText".text = tr("WIDTH")
 	$"heightInput".tooltip_text = tr("HEIGHT")
 	$"widthInput".tooltip_text = tr("WIDTH")
-	# generate color tilemaps
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
 
 func _on_exit_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/sandboxMenu.tscn")

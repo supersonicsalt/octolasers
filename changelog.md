@@ -1,6 +1,8 @@
 # changelog
 ## pre alpha versions
 ### menu versions
+#### version 0.0.menuUpdate.2 HOTFIX
+* fixed buttons not redirecting correctly
 #### version 0.0.menuUpdate.2
 * added changelog.md
 * renamed featureBoard.ftbd to featureBoard.md
