@@ -339,6 +339,7 @@ color = Color(0.5, 0.5, 0.5, 1)
 [node name="selectRect" type="TextureRect" parent="itemList/colorSquare13"]
 visible = false
 self_modulate = Color(1, 1, 1, 0.5)
+z_index = 1
 layout_mode = 0
 offset_right = 20.0
 offset_bottom = 20.0
@@ -361,6 +362,7 @@ color = Color(0.498039, 0.498039, 0.498039, 1)
 [node name="selectRect" type="TextureRect" parent="itemList/colorSquare14"]
 visible = false
 self_modulate = Color(1, 1, 1, 0.5)
+z_index = 1
 layout_mode = 0
 offset_right = 20.0
 offset_bottom = 20.0
@@ -382,6 +384,7 @@ color = Color(0.498039, 0.498039, 0.498039, 1)
 [node name="selectRect" type="TextureRect" parent="itemList/colorSquare15"]
 visible = false
 self_modulate = Color(1, 1, 1, 0.5)
+z_index = 1
 layout_mode = 0
 offset_right = 20.0
 offset_bottom = 20.0
@@ -404,6 +407,7 @@ color = Color(0.498039, 0.498039, 0.498039, 1)
 [node name="selectRect" type="TextureRect" parent="itemList/colorSquare16"]
 visible = false
 self_modulate = Color(1, 1, 1, 0.5)
+z_index = 1
 layout_mode = 0
 offset_right = 20.0
 offset_bottom = 20.0

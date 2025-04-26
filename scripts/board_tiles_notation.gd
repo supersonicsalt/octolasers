@@ -1,59 +1,110 @@
 extends TileMapLayer
 
-func laser4dToAtlas(laser4d:Vector4i) -> Vector2i:
-	laser4d = laser4dNormalize(laser4d)
-	return Vector2i(laser4d.x + laser4d.y * 3, laser4d.z + laser4d.w * 3)
+class LaserTile:
+	enum direction {
+		top = 0,
+		right = 1,
+		left = 2,
+		bottom = 3,
+	}
+	enum state {
+		error = -1,
+		none = 0,
+		noDot = 1,
+		withDot = 2,
+	}
+	const dotAtlasCoords = Vector2i(3, 0)
+	
+	static func getArrowAtlas(direct:direction) -> Vector2i:
+		return Vector2i(9, direct)
+	
+	var top: state
+	var right: state
+	var left: state
+	var bottom: state
+	
+	func _init(inpTop:state = state.none, inpRight:state = state.none, inpLeft:state = state.none, inpBottom:state = state.none):
+		top = inpTop
+		right = inpRight
+		left = inpLeft
+		bottom = inpBottom
+		Normalize()
+	
+	func getVector2i() -> Vector2i:
+		return Vector2i(top + right * 3, left + bottom * 3)
+	
+	static func laserTileToAtlas(laserTile:LaserTile) -> Vector2i:
+		laserTile.Normalize()
+		if laserTile.top < 0 || laserTile.right < 0 || laserTile.left < 0 || laserTile.bottom < 0:
+			return Vector2i(-1, -1)
+		return Vector2i(laserTile.top + laserTile.right * 3, laserTile.left + laserTile.bottom * 3)
+	
+	static func atlasToLaserTile(atlasCoords:Vector2i) -> LaserTile:
+		@warning_ignore("integer_division")
+		return LaserTile.new(atlasCoords.x % 3, atlasCoords.x / 3, atlasCoords.y % 3, atlasCoords.y / 3)
+		
+	func setFromAtlas(atlasCoords:Vector2i):
+		top = (atlasCoords.x % 3) as state
+		@warning_ignore("integer_division")
+		right = (atlasCoords.x / 3) as state
+		left = (atlasCoords.y % 3) as state
+		@warning_ignore("integer_division")
+		bottom = (atlasCoords.y / 3) as state
+	
+	func Normalize():
+		if top < 0 || right < 0 || left < 0 || bottom < 0:
+			top = -1 as state
+			right = -1 as state
+			left = -1 as state
+			bottom = -1 as state
+			return
+		top = (top % 3) as state
+		right = (right % 3) as state
+		left = (left % 3) as state
+		bottom = (bottom % 3) as state
+	
+	static func laserTileNormalize(laserTile:LaserTile) -> LaserTile:
+		if laserTile.top < 0 || laserTile.right < 0 || laserTile.left < 0 || laserTile.bottom < 0:
+			return LaserTile.new(-1 as state, -1 as state, -1 as state, -1 as state)
+		laserTile.top = (laserTile.top % 3) as state
+		laserTile.right = (laserTile.right % 3) as state
+		laserTile.left = (laserTile.left % 3) as state
+		laserTile.bottom = (laserTile.bottom % 3) as state
+		return laserTile
+	
+	static func modifyAtlasCell(tile:Vector2i, location:direction, newValue:state) -> Vector2i:
+		return laserTileToAtlas(modifyCell(atlasToLaserTile(tile), newValue, location))
+	
+	func modifySelfCell(newValue:state, location:direction = direction.top) -> void:
+		if location == direction.top:
+			top = newValue
+		if location == direction.right:
+			right = newValue
+		if location == direction.left:
+			left = newValue
+		if location == direction.bottom:
+			bottom = newValue
+	
+	static func modifyCell(tile:LaserTile, newValue:state, location:direction = direction.top) -> LaserTile:
+		if location == direction.top:
+			tile.top = newValue
+		if location == direction.right:
+			tile.right = newValue
+		if location == direction.left:
+			tile.left = newValue
+		if location == direction.bottom:
+			tile.bottom = newValue
+		return tile
 
-func AtlasTolaser4d(atlasCoords:Vector2i) -> Vector4i:
-	@warning_ignore("integer_division")
-	return Vector4i(atlasCoords.x % 3, atlasCoords.x / 3, atlasCoords.y % 3, atlasCoords.y / 3)
-
-func laser4dNormalize(laser4d:Vector4i) -> Vector4i:
-	if laser4d.x > 2 || laser4d.x < 0:
-		laser4d.x = abs(laser4d.x % 3)
-	if laser4d.y > 2 || laser4d.y < 0:
-		laser4d.y = abs(laser4d.y % 3)
-	if laser4d.z > 2 || laser4d.z < 0:
-		laser4d.z = abs(laser4d.z % 3)
-	if laser4d.w > 2 || laser4d.w < 0:
-		laser4d.x = abs(laser4d.w % 3)
-	return laser4d
-
-enum direction {
-	top = 0,
-	right = 1,
-	left = 2,
-	bottom = 3,
-}
-
-enum state {
-	none = 0,
-	noDot = 1,
-	withDot = 2,
-}
-
-func modifyCell(tile:Vector2i, location:direction, newValue:state) -> Vector2i:
-	return laser4dToAtlas(modifyCell4d(AtlasTolaser4d(tile), location, newValue))
-
-func modifyCell4d(tile:Vector4i, location:direction, newValue:state) -> Vector4i:
-	if location == direction.top:
-		tile.x = newValue
-	if location == direction.right:
-		tile.y = newValue
-	if location == direction.left:
-		tile.z = newValue
-	if location == direction.bottom:
-		tile.w = newValue
-	return tile
-
-var tileMaps
+## all of the tileMapLayers under BoardTiles
+var tileMaps:Array[Node]
 
 func _ready() -> void:
 	tileMaps = get_children()
 	_on_input_text_changed()
 	generateLaserTiles()
 
-func generateLaserTiles():
+func generateLaserTiles() -> void:
 	var colorSquares = $"../../itemList".get_children()
 	for n in colorSquares.size():
 		tileMaps[n].modulate = Color(colorSquares[n].color, 1)
@@ -61,27 +112,102 @@ func generateLaserTiles():
 var lastArrows:Array[Vector2i]
 
 func _input(event: InputEvent) -> void:
-	if event is InputEventMouseButton && event.button_index == MOUSE_BUTTON_LEFT && event.is_pressed() && $"../../itemList".selected > 0:
-		setCell(tileMaps[$"../../ItemList".selected - 1], get_cell_atlas_coords(to_local(get_local_mouse_position())))
+	if event is InputEventMouseButton && event.button_index == MOUSE_BUTTON_LEFT && event.is_pressed():
+		if $"../../itemList".pencilSelection == 0:
+			clearCell(local_to_map(to_local(event.global_position)))
+		else:
+			if $"../../itemList".dotSelection:
+				dotCell(tileMaps[$"../../itemList".pencilSelection - 1], local_to_map(to_local(event.global_position)))
+			else:
+				setCell(tileMaps[$"../../itemList".pencilSelection - 1], local_to_map(to_local(event.global_position)))
 
-func setCell(tileMap: TileMapLayer, coords: Vector2i):
-	var atlasCoords = Vector2i(-1, -1)
-	if tileMap.get_cell_atlas_coords(coords) == Vector2i(-1, -1):
-		tileMap.set_cell(coords, 0, atlasCoords)
-	#else:
-		#if tileMap.get_cell_atlas_coords(Vector2i(coords.x - 1, coords.y)) == laserTileSetDictionary.straight.horizontal:
-			#tileMap.set_cell(Vector2i(coords.x - 1, coords.y), 0, laserTileSetDictionary.deadEnd.left.noDot)
+func clearCell(coords: Vector2i) -> void:
+	for tileMap in tileMaps:
+		eraseCell(tileMap, coords)
 
-func vector2IArrayContains(vector2IArray:Array[Vector2i], vector2I:Vector2i):
-	for checkVector2I in vector2IArray:
-		if checkVector2I.x == vector2I.x && checkVector2I.y == vector2I.y:
-			return true
-	return false
+func eraseCell(tileMap: TileMapLayer, coords: Vector2i) -> void:
+	if tileMap.get_cell_source_id(coords) == 3:
+		tileMap.set_cell(Vector2i(coords.x, coords.y - 2), 2, LaserTile.laserTileToAtlas(LaserTile.modifyCell(LaserTile.atlasToLaserTile(tileMap.get_cell_atlas_coords(Vector2i(coords.x, coords.y - 2))), LaserTile.state.none, LaserTile.direction.bottom)))
+		tileMap.set_cell(Vector2i(coords.x + 2, coords.y), 2, LaserTile.laserTileToAtlas(LaserTile.modifyCell(LaserTile.atlasToLaserTile(tileMap.get_cell_atlas_coords(Vector2i(coords.x + 2, coords.y))), LaserTile.state.none, LaserTile.direction.left)))
+		tileMap.set_cell(Vector2i(coords.x - 2, coords.y), 2, LaserTile.laserTileToAtlas(LaserTile.modifyCell(LaserTile.atlasToLaserTile(tileMap.get_cell_atlas_coords(Vector2i(coords.x - 2, coords.y))), LaserTile.state.none, LaserTile.direction.right)))
+		tileMap.set_cell(Vector2i(coords.x, coords.y + 2), 2, LaserTile.laserTileToAtlas(LaserTile.modifyCell(LaserTile.atlasToLaserTile(tileMap.get_cell_atlas_coords(Vector2i(coords.x, coords.y + 2))), LaserTile.state.none, LaserTile.direction.top)))
+	else:
+		tileMap.set_cell(Vector2i(coords.x, coords.y - 1), 2, LaserTile.laserTileToAtlas(LaserTile.modifyCell(LaserTile.atlasToLaserTile(tileMap.get_cell_atlas_coords(Vector2i(coords.x, coords.y - 1))), LaserTile.state.none, LaserTile.direction.bottom)))
+		tileMap.set_cell(Vector2i(coords.x + 1, coords.y), 2, LaserTile.laserTileToAtlas(LaserTile.modifyCell(LaserTile.atlasToLaserTile(tileMap.get_cell_atlas_coords(Vector2i(coords.x + 1, coords.y))), LaserTile.state.none, LaserTile.direction.left)))
+		tileMap.set_cell(Vector2i(coords.x - 1, coords.y), 2, LaserTile.laserTileToAtlas(LaserTile.modifyCell(LaserTile.atlasToLaserTile(tileMap.get_cell_atlas_coords(Vector2i(coords.x - 1, coords.y))), LaserTile.state.none, LaserTile.direction.right)))
+		tileMap.set_cell(Vector2i(coords.x, coords.y + 1), 2, LaserTile.laserTileToAtlas(LaserTile.modifyCell(LaserTile.atlasToLaserTile(tileMap.get_cell_atlas_coords(Vector2i(coords.x, coords.y + 1))), LaserTile.state.none, LaserTile.direction.top)))
+	tileMap.erase_cell(coords)
+
+func setCell(tileMap: TileMapLayer, coords: Vector2i) -> void:
+	var laserTile:LaserTile = LaserTile.new()
+	if get_cell_source_id(coords) == -1 || tileMap.get_cell_source_id(coords) == 3 || tileMap.get_cell_source_id(Vector2i(coords.x, coords.y - 1)) == 3 || tileMap.get_cell_source_id(Vector2i(coords.x + 1, coords.y)) == 3 || tileMap.get_cell_source_id(Vector2i(coords.x - 1, coords.y)) == 3 || tileMap.get_cell_source_id(Vector2i(coords.x, coords.y + 1)) == 3:
+		return
+	if tileMap.get_cell_source_id(Vector2i(coords.x, coords.y - 1)) == 2:
+		laserTile.modifySelfCell(LaserTile.state.noDot, LaserTile.direction.top)
+		tileMap.set_cell(Vector2i(coords.x, coords.y - 1), 2, LaserTile.laserTileToAtlas(LaserTile.modifyCell(LaserTile.atlasToLaserTile(tileMap.get_cell_atlas_coords(Vector2i(coords.x, coords.y - 1))), LaserTile.state.noDot, LaserTile.direction.bottom)))
+	if tileMap.get_cell_source_id(Vector2i(coords.x + 1, coords.y)) == 2:
+		laserTile.modifySelfCell(LaserTile.state.noDot, LaserTile.direction.right)
+		tileMap.set_cell(Vector2i(coords.x + 1, coords.y), 2, LaserTile.laserTileToAtlas(LaserTile.modifyCell(LaserTile.atlasToLaserTile(tileMap.get_cell_atlas_coords(Vector2i(coords.x + 1, coords.y))), LaserTile.state.noDot, LaserTile.direction.left)))
+	if tileMap.get_cell_source_id(Vector2i(coords.x - 1, coords.y)) == 2:
+		laserTile.modifySelfCell(LaserTile.state.noDot, LaserTile.direction.left)
+		tileMap.set_cell(Vector2i(coords.x - 1, coords.y), 2, LaserTile.laserTileToAtlas(LaserTile.modifyCell(LaserTile.atlasToLaserTile(tileMap.get_cell_atlas_coords(Vector2i(coords.x - 1, coords.y))), LaserTile.state.noDot, LaserTile.direction.right)))
+	if tileMap.get_cell_source_id(Vector2i(coords.x, coords.y + 1)) == 2:
+		laserTile.modifySelfCell(LaserTile.state.noDot, LaserTile.direction.bottom)
+		tileMap.set_cell(Vector2i(coords.x, coords.y + 1), 2, LaserTile.laserTileToAtlas(LaserTile.modifyCell(LaserTile.atlasToLaserTile(tileMap.get_cell_atlas_coords(Vector2i(coords.x, coords.y + 1))), LaserTile.state.noDot, LaserTile.direction.top)))
+	if tileMap.get_cell_source_id(Vector2i(coords.x, coords.y - 2)) == 3:
+		laserTile.modifySelfCell(LaserTile.state.withDot, LaserTile.direction.top)
+	if tileMap.get_cell_source_id(Vector2i(coords.x + 2, coords.y)) == 3:
+		laserTile.modifySelfCell(LaserTile.state.withDot, LaserTile.direction.right)
+	if tileMap.get_cell_source_id(Vector2i(coords.x - 2, coords.y)) == 3:
+		laserTile.modifySelfCell(LaserTile.state.withDot, LaserTile.direction.left)
+	if tileMap.get_cell_source_id(Vector2i(coords.x, coords.y + 2)) == 3:
+		laserTile.modifySelfCell(LaserTile.state.withDot, LaserTile.direction.bottom)
+	tileMap.set_cell(coords, 2, laserTile.getVector2i())
+
+func dotCell(tileMap: TileMapLayer, coords: Vector2i) -> void:
+	if get_cell_source_id(coords) == -1 ||\
+	 get_cell_source_id(Vector2i(coords.x, coords.y - 1)) == -1 ||\
+	 get_cell_source_id(Vector2i(coords.x + 1, coords.y)) == -1 ||\
+	 get_cell_source_id(Vector2i(coords.x - 1, coords.y)) == -1 ||\
+	 get_cell_source_id(Vector2i(coords.x, coords.y + 1)) == -1 ||\
+	 (tileMap.get_cell_source_id(Vector2i(coords.x - 2, coords.y - 1)) == 3 ||\
+	 tileMap.get_cell_source_id(Vector2i(coords.x - 2, coords.y)) == 3 ||\
+	 tileMap.get_cell_source_id(Vector2i(coords.x - 2, coords.y + 1)) == 3 ||\
+	 tileMap.get_cell_source_id(Vector2i(coords.x - 1, coords.y - 2)) == 3 ||\
+	 tileMap.get_cell_source_id(Vector2i(coords.x - 1, coords.y - 1)) == 3 ||\
+	 tileMap.get_cell_source_id(Vector2i(coords.x - 1, coords.y)) == 3 ||\
+	 tileMap.get_cell_source_id(Vector2i(coords.x - 1, coords.y + 1)) == 3 ||\
+	 tileMap.get_cell_source_id(Vector2i(coords.x - 1, coords.y + 2)) == 3 ||\
+	 tileMap.get_cell_source_id(Vector2i(coords.x, coords.y - 2)) == 3 ||\
+	 tileMap.get_cell_source_id(Vector2i(coords.x, coords.y - 1)) == 3 ||\
+	 tileMap.get_cell_source_id(coords) == 3 ||\
+	 tileMap.get_cell_source_id(Vector2i(coords.x, coords.y + 1)) == 3 ||\
+	 tileMap.get_cell_source_id(Vector2i(coords.x, coords.y + 2)) == 3 ||\
+	 tileMap.get_cell_source_id(Vector2i(coords.x + 1, coords.y - 2)) == 3 ||\
+	 tileMap.get_cell_source_id(Vector2i(coords.x + 1, coords.y - 1)) == 3 ||\
+	 tileMap.get_cell_source_id(Vector2i(coords.x + 1, coords.y)) == 3 ||\
+	 tileMap.get_cell_source_id(Vector2i(coords.x + 1, coords.y + 1)) == 3 ||\
+	 tileMap.get_cell_source_id(Vector2i(coords.x + 1, coords.y + 2)) == 3 ||\
+	 tileMap.get_cell_source_id(Vector2i(coords.x + 2, coords.y - 1)) == 3 ||\
+	 tileMap.get_cell_source_id(Vector2i(coords.x + 2, coords.y)) == 3 ||\
+	 tileMap.get_cell_source_id(Vector2i(coords.x + 2, coords.y + 1)) == 3):
+		return
+	eraseCell(tileMap, Vector2i(coords.x, coords.y - 1))
+	eraseCell(tileMap, Vector2i(coords.x + 1, coords.y))
+	eraseCell(tileMap, Vector2i(coords.x - 1, coords.y))
+	eraseCell(tileMap, Vector2i(coords.x, coords.y + 1))
+	if tileMap.get_cell_source_id(Vector2i(coords.x, coords.y - 2)) == 2:
+		tileMap.set_cell(Vector2i(coords.x, coords.y - 2), 2, LaserTile.laserTileToAtlas(LaserTile.modifyCell(LaserTile.atlasToLaserTile(tileMap.get_cell_atlas_coords(Vector2i(coords.x, coords.y - 2))), LaserTile.state.withDot, LaserTile.direction.bottom)))
+	if tileMap.get_cell_source_id(Vector2i(coords.x + 2, coords.y)) == 2:
+		tileMap.set_cell(Vector2i(coords.x + 2, coords.y), 2, LaserTile.laserTileToAtlas(LaserTile.modifyCell(LaserTile.atlasToLaserTile(tileMap.get_cell_atlas_coords(Vector2i(coords.x + 2, coords.y))), LaserTile.state.withDot, LaserTile.direction.left)))
+	if tileMap.get_cell_source_id(Vector2i(coords.x - 2, coords.y)) == 2:
+		tileMap.set_cell(Vector2i(coords.x - 2, coords.y), 2, LaserTile.laserTileToAtlas(LaserTile.modifyCell(LaserTile.atlasToLaserTile(tileMap.get_cell_atlas_coords(Vector2i(coords.x - 2, coords.y))), LaserTile.state.withDot, LaserTile.direction.right)))
+	if tileMap.get_cell_source_id(Vector2i(coords.x, coords.y + 2)) == 2: 
+		tileMap.set_cell(Vector2i(coords.x, coords.y + 2), 2, LaserTile.laserTileToAtlas(LaserTile.modifyCell(LaserTile.atlasToLaserTile(tileMap.get_cell_atlas_coords(Vector2i(coords.x, coords.y + 2))), LaserTile.state.withDot, LaserTile.direction.top)))
+	tileMap.set_cell(coords, 3, LaserTile.dotAtlasCoords)
 
 var height:int = 12
 var width:int = 12
-
-var tileBoards = []
 
 func _on_input_text_changed() -> void:
 	clearAll()
@@ -116,7 +242,7 @@ func _on_input_text_changed() -> void:
 	#$"../OctodotTiles".scale.y = min(scalarX, scalarY)
 	#$"../LaserTiles".scale.x = min(scalarX, scalarY)
 	#$"../LaserTiles".scale.y = min(scalarX, scalarY)
-	
+
 func clearAll():
 	clear()
 	#$"../OctodotTiles".clear()
@@ -125,17 +251,7 @@ func clearAll():
 	$"../../logText".text = ""
 
 func generateBoard(xOffset:int, yOffset:int):
-	for y in range(0, height):
-		@warning_ignore("integer_division")
-		set_cell(Vector2i(-1 - width / 2 + xOffset, y - height / 2 + yOffset),0, Vector2i(0, 1))
 	for n1 in range(0, width):
-		@warning_ignore("integer_division")
-		set_cell(Vector2i(n1 - width / 2 + xOffset, -1 - height / 2 + yOffset),0, Vector2i(0, 2))
 		for n2 in range(0, height):
 			@warning_ignore("integer_division")
-			set_cell(Vector2i(n1 - width / 2 + xOffset, n2 - height / 2 + yOffset),1, Vector2i((n1 + n2) % 2, 0))
-		@warning_ignore("integer_division")
-		set_cell(Vector2i(n1 - width / 2 + xOffset, height / 2 + height % 2 + yOffset),0, Vector2i(0, 0))
-	for n in range(0, height):
-		@warning_ignore("integer_division")
-		set_cell(Vector2i(width / 2 + width % 2 + xOffset, n - height / 2 + yOffset),0, Vector2i(0, 3))
+			set_cell(Vector2i(n1 - width / 2 + xOffset, n2 - height / 2 + yOffset),1, Vector2i((n1 + n2) % 2 + 2, 0))
