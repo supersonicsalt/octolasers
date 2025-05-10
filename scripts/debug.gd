@@ -23,7 +23,7 @@ var delay = 0
 var lastDelay = 0
 var globalTime:float
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var tempTime:float = Time.get_unix_time_from_system() * 10
 	var tempDelay = (tempTime - globalTime) * $HSlider.value
 	lastDelay = delay

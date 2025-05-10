@@ -45,6 +45,12 @@ position = Vector2(102, 60)
 tile_set = ExtResource("6_3eikl")
 script = ExtResource("7_yoyod")
 
+[node name="ColorRect" type="ColorRect" parent="tileMaps"]
+offset_left = 101.0
+offset_top = 59.0
+offset_right = 103.0
+offset_bottom = 61.0
+
 [node name="heightText" type="TextEdit" parent="."]
 clip_contents = false
 offset_left = 10.0

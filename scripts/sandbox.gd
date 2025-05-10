@@ -9,7 +9,7 @@ func _ready() -> void:
 	$"widthInput".tooltip_text = tr("WIDTH")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 
 func _on_exit_pressed() -> void:
