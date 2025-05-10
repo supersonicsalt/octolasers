@@ -1,5 +1,9 @@
 # changelog
 ## pre alpha versions
+### notation update
+#### version 0.0.notationUpdate.1
+* added and fixed notation functionality
+* refactored code that was kinda messy
 ### menu versions
 #### version 0.0.menuUpdate.2 HOTFIX
 * fixed buttons not redirecting correctly
