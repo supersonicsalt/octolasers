@@ -5,7 +5,7 @@ func _ready() -> void:
 	tileMapsSize = $"..".size
 	_on_input_text_changed()
 
-var lastArrows:Array[Vector2i]
+var lastArrows:Array[Vector2] = []
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
@@ -13,12 +13,12 @@ func _process(_delta: float) -> void:
 	setHoveringIndicator(mouseCoords)
 
 func setHoveringIndicator(mouseCoords) -> void:
-	for lastArrow in lastArrows:
+	for lastArrow in lastArrows.duplicate():
 		set_cell(lastArrow, 0, Vector2i(0, get_cell_atlas_coords(lastArrow).y))
 		lastArrows.erase(lastArrow)
-	if get_cell_source_id(mouseCoords) == 0 && get_cell_atlas_coords(mouseCoords).x == 0:
+	if get_cell_source_id(mouseCoords) == 0 and get_cell_atlas_coords(mouseCoords).x == 0:
 		set_cell(mouseCoords, 0, Vector2i(1, get_cell_atlas_coords(mouseCoords).y))
-		if !mouseCoords in lastArrows:
+		if !(mouseCoords in lastArrows):
 			lastArrows.append(mouseCoords)
 
 var height:int = 12
@@ -52,6 +52,7 @@ func _on_input_text_changed() -> void:
 		$"../LaserTiles".position.x = tileMapsSize.x / 2
 	var scalar:float = min(tileMapsSize.x / (float(width + 2) * 8), tileMapsSize.y / (float(height + 2) * 8))
 	var scalar2:Vector2 = Vector2(scalar, scalar)
+	scale = scalar2
 	$"../OctodotTiles".scale = scalar2
 	$"../LaserTiles".scale = scalar2
 	clear()

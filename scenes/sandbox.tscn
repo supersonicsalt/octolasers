@@ -46,6 +46,7 @@ tile_set = ExtResource("6_3eikl")
 script = ExtResource("7_yoyod")
 
 [node name="ColorRect" type="ColorRect" parent="tileMaps"]
+layout_mode = 0
 offset_left = 101.0
 offset_top = 59.0
 offset_right = 103.0
