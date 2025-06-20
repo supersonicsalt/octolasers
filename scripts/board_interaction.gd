@@ -21,6 +21,15 @@ func setHoveringIndicator(mouseCoords) -> void:
 		if !(mouseCoords in lastArrows):
 			lastArrows.append(mouseCoords)
 
+func setLaserArrowsRed(mouseCoords) -> void:
+	for lastArrow in lastArrows.duplicate():
+		set_cell(lastArrow, 0, Vector2i(0, get_cell_atlas_coords(lastArrow).y))
+		lastArrows.erase(lastArrow)
+	if get_cell_source_id(mouseCoords) == 0 and get_cell_atlas_coords(mouseCoords).x == 0:
+		set_cell(mouseCoords, 0, Vector2i(1, get_cell_atlas_coords(mouseCoords).y))
+		if !(mouseCoords in lastArrows):
+			lastArrows.append(mouseCoords)
+
 var height:int = 12
 var width:int = 12
 

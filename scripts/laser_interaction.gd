@@ -1,8 +1,8 @@
 extends TileMapLayer
 
-var lmbPressed = false
+var lmbPressed:bool = false
 
-func entranceToText(laserEntrance):
+func entranceToText(laserEntrance:Vector2i) -> String:
 	if $"../BoardTiles".get_cell_atlas_coords(laserEntrance).y == 1:
 		return(str(laserEntrance.y) + tr("LEFT"))
 	if $"../BoardTiles".get_cell_atlas_coords(laserEntrance).y == 3:
@@ -13,10 +13,10 @@ func entranceToText(laserEntrance):
 		return(str(laserEntrance.x) + tr("DOWN"))
 	return "-1"
 
-func _input(event):
+func _input(event:InputEvent) -> void:
 	if event.as_text().contains("Left Mouse Button") && $"../BoardTiles".get_cell_source_id(local_to_map(to_local(get_global_mouse_position()))) == 0:
 		if !lmbPressed:
-			var laserStart = local_to_map(to_local(get_global_mouse_position()))
+			var laserStart:Vector2i = local_to_map(to_local(get_global_mouse_position()))
 			var direction:int = -1
 			if $"../BoardTiles".get_cell_atlas_coords(laserStart).y == 1:
 				direction = 0
@@ -26,35 +26,77 @@ func _input(event):
 				direction = 2
 			elif $"../BoardTiles".get_cell_atlas_coords(laserStart).y == 0:
 				direction = 3
-			var laserExit = drawLaser(laserStart, direction)
-			var startText = entranceToText(laserStart)
-			var exitText = entranceToText(laserExit)
+			var laserExit:Vector2i = drawLaser(laserStart, direction)
+			var startText:String = entranceToText(laserStart)
+			var exitText:String = entranceToText(laserExit)
 			if exitText == "-1":
 				exitText = startText
 			if !$"../../logText".text.contains(startText + "-" + exitText) && !$"../../logText".text.contains(exitText + "-" + startText):
-				$"../../logText".text = $"../../logText".text + lazerLetter + startText + "-" + exitText + "\n"
+				$"../../logText".text = $"../../logText".text + lazerLetter + "|" + startText + "-" + exitText + "\n"
 				$"../../logText".set_v_scroll($"../../logText".get_scroll_pos_for_line($"../../logText".get_line_count() - 1))
 				lazerLetter = advanceLetter(lazerLetter)
+			elif $"../../logText".text.contains(startText + "-" + exitText):
+				$"../../logText".remove_line_at($"../../logText".search(startText + "-" + exitText, TextEdit.SearchFlags.SEARCH_MATCH_CASE, 0, 0).y)
+				checkLetter()
+				$"../../logText".set_v_scroll($"../../logText".get_scroll_pos_for_line($"../../logText".get_line_count() - 1))
+			elif $"../../logText".text.contains(exitText + "-" + startText):
+				$"../../logText".remove_line_at($"../../logText".search(exitText + "-" + startText, TextEdit.SearchFlags.SEARCH_MATCH_CASE, 0, 0).y)
+				checkLetter()
+				$"../../logText".set_v_scroll($"../../logText".get_scroll_pos_for_line($"../../logText".get_line_count() - 1))
 		lmbPressed = !lmbPressed
 
 var lazerLetter:String = "a"
 
-func advanceLetter(letter:String):
+func checkLetter() -> void:
+	lazerLetter = "a"
+	var newText:String
+	for line in $"../../logText".text.split("\n", false).duplicate():
+		newText = newText + lazerLetter + line.substr(line.find("|")) + "\n"
+		lazerLetter = advanceLetter(lazerLetter)
+	$"../../logText".clear()
+	$"../../logText".text = newText#.erase(newText.length() - 3)
+
+func advanceLetter(letter:String) -> String:
+	if letter == "#":
+		return "A"
+	for character in letter.to_lower():
+		if character < 'a' or character > 'z':
+			return "!"
 	if letter.ends_with("Z"):
-		if letter.erase(letter.length() - 1, 1) == "":
+		if letter.erase(letter.length() - 1) == "":
 			letter = "AA"
 		else:
 			letter = advanceLetter(letter.erase(letter.length() - 1, 1)) + "A"
 	elif letter.ends_with("z"):
-		if letter.erase(letter.length() - 1, 1) == "":
+		if letter.erase(letter.length() - 1) == "":
 			letter = "aa"
 		else:
-			letter = advanceLetter(letter.erase(letter.length() - 1, 1)) + "a"
+				letter = advanceLetter(letter.erase(letter.length() - 1, 1)) + "a"
 	else:
 		letter = letter.erase(letter.length() - 1, 1) + String.chr(letter.unicode_at(letter.length() - 1) + 1)
 	return letter
 
-func drawLaser(start:Vector2i, direction):
+func devancetLetter(letter:String) -> String:
+	if letter == "#":
+		return "#"
+	for character in letter.to_lower():
+		if character <= 'a' or character >= 'z':
+			return "!"
+	if letter.ends_with("A"):
+		if letter.erase(letter.length() - 1, 1) == "":
+			letter = "#"
+		else:
+			letter = devancetLetter(letter.erase(letter.length() - 1, 1))
+	elif letter.ends_with("a"):
+		if letter.erase(letter.length() - 1, 1) == "":
+			letter = "!"
+		else:
+			letter = devancetLetter(letter.erase(letter.length() - 1, 1))
+	else:
+		letter = letter.erase(letter.length() - 1, 1) + String.chr(letter.unicode_at(letter.length() - 1) - 1)
+	return letter
+
+func drawLaser(start:Vector2i, direction:int) -> Vector2i:
 	if direction == 0:
 		start.x += 1
 	elif direction == 1:
@@ -63,7 +105,7 @@ func drawLaser(start:Vector2i, direction):
 		start.y += 1
 	elif direction == 3:
 		start.y -= 1
-	var inProgress = direction != -1
+	var inProgress:bool = direction != -1
 	if direction == 0:
 		if $"../OctodotTiles".get_cell_source_id(Vector2i(start.x + 1, start.y)) == 1:
 			inProgress = false
