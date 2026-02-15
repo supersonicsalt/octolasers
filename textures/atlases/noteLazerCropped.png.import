@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b87ipy35codmy"
-path="res://.godot/imported/lazer.png-03ce801b6ca3a59b5b0a1a815c29115b.ctex"
+uid="uid://crgii1yaomg8i"
+path="res://.godot/imported/noteLazerCropped.png-e4282cb69039cf7fc7131f342d34f73c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/atlases/lazer.png"
-dest_files=["res://.godot/imported/lazer.png-03ce801b6ca3a59b5b0a1a815c29115b.ctex"]
+source_file="res://textures/atlases/noteLazerCropped.png"
+dest_files=["res://.godot/imported/noteLazerCropped.png-e4282cb69039cf7fc7131f342d34f73c.ctex"]
 
 [params]
 

@@ -35,12 +35,12 @@ scale = Vector2(2, 2)
 texture_normal = ExtResource("3_4yjxr")
 
 [node name="TextEdit" type="TextEdit" parent="."]
-offset_left = 91.0
+offset_left = 113.0
 offset_top = 92.0
-offset_right = 229.0
+offset_right = 207.0
 offset_bottom = 127.0
 tooltip_text = "b2N0b2xvY2s="
-text = "hello lockpickers"
+text = "hello there"
 
 [node name="story" type="TextureButton" parent="."]
 offset_left = 148.0
@@ -53,3 +53,4 @@ texture_normal = ExtResource("4_4yjxr")
 texture_disabled = ExtResource("5_trgj8")
 
 [connection signal="pressed" from="exit" to="." method="_on_exit_pressed"]
+[connection signal="text_changed" from="TextEdit" to="." method="_on_text_edit_text_changed"]

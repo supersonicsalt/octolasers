@@ -15,3 +15,6 @@ func _on_puzzle_pressed() -> void:
 
 func _on_versus_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/playMenu.tscn")
+
+func _on_story_pressed() -> void:
+	get_tree().change_scene_to_file("res://scenes/storyMenu.tscn")

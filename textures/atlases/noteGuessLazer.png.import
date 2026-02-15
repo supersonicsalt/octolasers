@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b87ipy35codmy"
-path="res://.godot/imported/lazer.png-03ce801b6ca3a59b5b0a1a815c29115b.ctex"
+uid="uid://baot4lu55fbbr"
+path="res://.godot/imported/noteGuessLazer.png-cf9857b1db525557cd60979042ea83e5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/atlases/lazer.png"
-dest_files=["res://.godot/imported/lazer.png-03ce801b6ca3a59b5b0a1a815c29115b.ctex"]
+source_file="res://textures/atlases/noteGuessLazer.png"
+dest_files=["res://.godot/imported/noteGuessLazer.png-cf9857b1db525557cd60979042ea83e5.ctex"]
 
 [params]
 
