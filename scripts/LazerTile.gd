@@ -5,8 +5,8 @@ class LaserTile:
 		error = -1,
 		top = 0,
 		right = 1,
-		left = 2,
-		bottom = 3,
+		bottom = 2,
+		left = 3,
 	}
 	enum state {
 		error = -1,
@@ -97,7 +97,12 @@ class LaserTile:
 
 	static func modifyAtlasCell(source:variation, tile:Vector2i, location:direction, newValue:state) -> Vector2i:
 		return laserTileToAtlas(modifyCell(atlasToLaserTile(source, tile), newValue, location))
-
+	
+	static func flipDirection(location:direction) -> direction:
+		if location == direction.error:
+			return direction.error
+		return (location + 2) % 4 as direction
+	
 	func modifySelfCell(newValue:state, location:direction = direction.top) -> void:
 		if location == direction.top:
 			top = newValue

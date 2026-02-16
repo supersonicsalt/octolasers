@@ -83,11 +83,39 @@ func setArrow(tileMap: TileMapLayer, coords: Vector2i, direction:LaserTile.Laser
 		modifyTileMapCell(tileMap, Vector2i(coords.x - 1, coords.y), LaserTile.LaserTile.state.noDot, LaserTile.LaserTile.direction.right)
 	if tileMap.get_cell_source_id(Vector2i(coords.x, coords.y + 1)) == guessSet and get_cell_source_id(Vector2i(coords.x, coords.y + 1)) == boardTileSet:
 		modifyTileMapCell(tileMap, Vector2i(coords.x, coords.y + 1), LaserTile.LaserTile.state.noDot, LaserTile.LaserTile.direction.top)
-	#updateArrow(tileMap, coords)
+	updateArrow(tileMap, coords)
 
 func updateArrow(tileMap: TileMapLayer, coords: Vector2i):
 	var direction:LaserTile.LaserTile.direction = LaserTile.LaserTile.arrowAtlasToDirection(tileMap.get_cell_atlas_coords(coords))
+	if direction == LaserTile.LaserTile.direction.error:
+		assert(false, "direction returned error in update arrow")
+		return
 	var start:Vector2i = coords
+	if whereOctoDot(tileMap, start, direction) == lookahead.center:
+		return
+	start = advanceLaser(direction, start)
+	while get_cell_source_id(start) == boardTileSet:
+		var dotPos:lookahead = whereOctoDot(tileMap, start, direction)
+		var entrySide:LaserTile.LaserTile.direction = LaserTile.LaserTile.flipDirection(direction)
+		var exitSide:LaserTile.LaserTile.direction = direction
+		var exitState:LaserTile.LaserTile.state = LaserTile.LaserTile.state.noDot
+		var stopAfterDraw:bool = false
+		if dotPos == lookahead.center:
+			exitState = LaserTile.LaserTile.state.withDot
+			stopAfterDraw = true
+		elif dotPos != lookahead.none:
+			direction = ((direction + 4 - dotPos) % 4) as LaserTile.LaserTile.direction
+		exitSide = direction
+		var laserTile:LaserTile.LaserTile = LaserTile.LaserTile.new(noteSet)
+		laserTile.modifySelfCell(LaserTile.LaserTile.state.noDot, entrySide)
+		laserTile.modifySelfCell(exitState, exitSide)
+		mergeTileMapCell(tileMap, start, laserTile, noteSet)
+		if stopAfterDraw:
+			return
+		start = advanceLaser(direction, start)
+	tileMap.set_cell(start, guessSet, LaserTile.LaserTile.arrowAtlasCoords[LaserTile.LaserTile.flipDirection(direction)])
+
+func advanceLaser(direction:LaserTile.LaserTile.direction, start:Vector2i) -> Vector2i:
 	if direction == LaserTile.LaserTile.direction.right:
 		start.x += 1
 	elif direction == LaserTile.LaserTile.direction.left:
@@ -96,13 +124,7 @@ func updateArrow(tileMap: TileMapLayer, coords: Vector2i):
 		start.y += 1
 	elif direction == LaserTile.LaserTile.direction.top:
 		start.y -= 1
-	var inProgress:bool = direction != LaserTile.LaserTile.direction.error
-	if whereOctoDot(tileMap, start, direction) == lookahead.center:
-		inProgress = false
-	while  inProgress:
-		if get_cell_source_id(start) != boardTileSet:
-			inProgress = false
-	return	Vector2i(start.x, start.y)
+	return start
 
 enum lookahead {
 	none = -2,
@@ -112,14 +134,24 @@ enum lookahead {
 }
 
 func whereOctoDot(tileMap:TileMapLayer, start:Vector2i, direction:LaserTile.LaserTile.direction) -> lookahead:
-	if direction % 3 == 0:
-		for looking:lookahead in lookahead:
-			if tileMap.get_cell_source_id(Vector2i(start.x + looking, start.y - (direction / 3 * 2 - 1))):
-				return (looking * (direction / 3 * 2 - 1)) as lookahead
+	if direction % 2 == 0:
+		for looking:lookahead in lookahead.values():
+			if looking == lookahead.none:
+				continue
+			elif looking == lookahead.center:
+				if tileMap.get_cell_source_id(Vector2i(start.x - looking * (direction - 1), start.y + (direction - 1) * 2)) == octodotSet:
+					return looking as lookahead
+			elif tileMap.get_cell_source_id(Vector2i(start.x - looking * (direction - 1), start.y + (direction - 1))) == octodotSet:
+				return looking as lookahead
 	else:
-		for looking in lookahead:
-			if tileMap.get_cell_source_id(Vector2i(start.x - (direction * 2 - 3), start.y + looking)):
-				return (looking * (direction * 2 - 3)) as lookahead
+		for looking:lookahead in lookahead.values():
+			if looking == lookahead.none:
+				continue
+			elif looking == lookahead.center:
+				if tileMap.get_cell_source_id(Vector2i(start.x - (direction - 2) * 2, start.y - looking * (direction - 2))) == octodotSet:
+					return looking as lookahead
+			elif tileMap.get_cell_source_id(Vector2i(start.x - (direction - 2), start.y - looking * (direction - 2))) == octodotSet:
+				return looking as lookahead
 	return lookahead.none
 
 func updateArrows(tileMap: TileMapLayer):
@@ -180,12 +212,21 @@ func setCell(tileMap: TileMapLayer, coords: Vector2i) -> void:
 		laserTile.modifySelfCell(LaserTile.LaserTile.state.withDot, LaserTile.LaserTile.direction.bottom)
 	tileMap.set_cell(coords, guessSet, laserTile.getVector2i())
 
-func modifyTileMapCell(tileMap:TileMapLayer, coords:Vector2i, newState:LaserTile.LaserTile.state, location:LaserTile.LaserTile.direction):
-	tileMap.set_cell(coords,guessSet,\
+func modifyTileMapCell(tileMap:TileMapLayer, coords:Vector2i, newState:LaserTile.LaserTile.state, location:LaserTile.LaserTile.direction, source:int = guessSet):
+	tileMap.set_cell(coords,source,\
 	 LaserTile.LaserTile.laserTileToAtlas(LaserTile.LaserTile.modifyCell(\
-	  LaserTile.LaserTile.atlasToLaserTile(guessSet, tileMap.get_cell_atlas_coords(coords)),\
+	  LaserTile.LaserTile.atlasToLaserTile(source, tileMap.get_cell_atlas_coords(coords)),\
 	  newState,\
 	  location)))
+	
+func mergeTileMapCell(tileMap:TileMapLayer, coords:Vector2i, laserTile:LaserTile.LaserTile, source:int = guessSet):
+	if source == tileMap.get_cell_source_id(coords):
+		var existingLaser:LaserTile.LaserTile = LaserTile.LaserTile.atlasToLaserTile(source, tileMap.get_cell_atlas_coords(coords))
+		laserTile.top = max(existingLaser.top, laserTile.top)
+		laserTile.right = max(existingLaser.right, laserTile.right)
+		laserTile.bottom = max(existingLaser.bottom, laserTile.bottom)
+		laserTile.left = max(existingLaser.left, laserTile.left)
+	tileMap.set_cell(coords,source, laserTile.getVector2i())
 
 func dotCell(tileMap: TileMapLayer, coords: Vector2i) -> void:
 	if get_cell_source_id(coords) == -1 ||\
