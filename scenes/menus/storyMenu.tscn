@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://ylx7n1fhd768"]
+
+[ext_resource type="Texture2D" uid="uid://dldufaeejm5ls" path="res://textures/menu/temp menu/background.png" id="2_f1dci"]
+[ext_resource type="Texture2D" uid="uid://d0i7ooo41r8s2" path="res://textures/menu/title.png" id="3_r0sdm"]
+[ext_resource type="Texture2D" uid="uid://d5sf8n5b050g" path="res://textures/menu/exit.png" id="4_g41yj"]
+[ext_resource type="Texture2D" uid="uid://d3d6vfoc6ohc3" path="res://textures/menu/story.png" id="5_u2kx8"]
+[ext_resource type="Texture2D" uid="uid://b10oft10xchwk" path="res://textures/menu/storyLocked.png" id="6_24tni"]
+
+[sub_resource type="GDScript" id="GDScript_wtsux"]
+script/source = "extends Node2D
+
+func _on_exit_pressed() -> void:
+	SceneMan.exit()
+
+
+func _on_text_edit_text_changed() -> void:
+	if ($TextEdit.text == \"octolock\"):
+		get_tree().change_scene_to_file(\"res://scenes/debug.tscn\")
+"
+
+[node name="storyMenu" type="Node2D" unique_id=1427095547]
+texture_filter = 1
+script = SubResource("GDScript_wtsux")
+
+[node name="background" type="TextureRect" parent="." unique_id=2014840736]
+offset_right = 320.0
+offset_bottom = 180.0
+texture = ExtResource("2_f1dci")
+
+[node name="title" type="TextureRect" parent="." unique_id=1775560783]
+offset_left = 94.0
+offset_top = 10.0
+offset_right = 160.0
+offset_bottom = 34.0
+scale = Vector2(2, 2)
+texture = ExtResource("3_r0sdm")
+expand_mode = 1
+stretch_mode = 2
+
+[node name="exit" type="TextureButton" parent="." unique_id=927941496]
+offset_left = 50.0
+offset_top = 10.0
+offset_right = 62.0
+offset_bottom = 22.0
+scale = Vector2(2, 2)
+texture_normal = ExtResource("4_g41yj")
+
+[node name="TextEdit" type="TextEdit" parent="." unique_id=1940818287]
+offset_left = 113.0
+offset_top = 92.0
+offset_right = 207.0
+offset_bottom = 127.0
+tooltip_text = "b2N0b2xvY2s="
+text = "hello there"
+
+[node name="story" type="TextureButton" parent="." unique_id=282857697]
+offset_left = 148.0
+offset_top = 68.0
+offset_right = 160.0
+offset_bottom = 80.0
+scale = Vector2(2, 2)
+disabled = true
+texture_normal = ExtResource("5_u2kx8")
+texture_disabled = ExtResource("6_24tni")
+
+[connection signal="pressed" from="exit" to="." method="_on_exit_pressed"]
+[connection signal="text_changed" from="TextEdit" to="." method="_on_text_edit_text_changed"]

@@ -1,31 +1,31 @@
-[gd_scene load_steps=3 format=3 uid="uid://7w6e2x7su4nr"]
+[gd_scene format=3 uid="uid://7w6e2x7su4nr"]
 
-[ext_resource type="Script" uid="uid://cfsld444j5c2p" path="res://scripts/debug.gd" id="1_lgrwq"]
-[ext_resource type="Script" uid="uid://drf26vgl82iij" path="res://scripts/color_rect.gd" id="2_4pmxj"]
+[ext_resource type="Script" uid="uid://cfsld444j5c2p" path="res://scenes/scripts/debug.gd" id="1_lgrwq"]
+[ext_resource type="Script" uid="uid://drf26vgl82iij" path="res://scenes/scripts/color_rect.gd" id="2_4pmxj"]
 
-[node name="debug" type="Node2D"]
+[node name="debug" type="Node2D" unique_id=579898338]
 script = ExtResource("1_lgrwq")
 
-[node name="HSlider" type="HSlider" parent="."]
+[node name="HSlider" type="HSlider" parent="." unique_id=786166899]
 offset_top = 124.0
 offset_right = 640.0
 offset_bottom = 140.0
 scale = Vector2(0.5, 0.5)
 
-[node name="HSlider2" type="HSlider" parent="."]
+[node name="HSlider2" type="HSlider" parent="." unique_id=1882105455]
 offset_top = 132.0
 offset_right = 640.0
 offset_bottom = 148.0
 scale = Vector2(0.5, 0.5)
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1097128982]
 offset_top = 140.0
 offset_right = 320.0
 offset_bottom = 180.0
 color = Color(0, 0, 0, 1)
 script = ExtResource("2_4pmxj")
 
-[node name="TextEdit" type="TextEdit" parent="."]
+[node name="TextEdit" type="TextEdit" parent="." unique_id=1153900357]
 offset_right = 1280.0
 offset_bottom = 496.0
 scale = Vector2(0.25, 0.25)

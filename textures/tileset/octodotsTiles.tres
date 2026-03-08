@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://oja1d7v6vtdw"]
+[gd_resource type="TileSet" format=3 uid="uid://oja1d7v6vtdw"]
 
 [ext_resource type="Texture2D" uid="uid://bwg0nrbcg7abd" path="res://textures/atlases/octodot.png" id="1_s14ty"]
 

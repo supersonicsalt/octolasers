@@ -1,0 +1,73 @@
+[gd_scene format=3 uid="uid://cv024iysr8mnf"]
+
+[ext_resource type="Script" uid="uid://b4xs56ctl83j5" path="res://scenes/menus/menu.gd" id="1_qj7as"]
+[ext_resource type="Texture2D" uid="uid://dldufaeejm5ls" path="res://textures/menu/temp menu/background.png" id="2_dy7ji"]
+[ext_resource type="Texture2D" uid="uid://d0i7ooo41r8s2" path="res://textures/menu/title.png" id="3_nw378"]
+[ext_resource type="Texture2D" uid="uid://b228ka76aj4t3" path="res://textures/menu/couchVersus.png" id="4_knuh4"]
+[ext_resource type="Texture2D" uid="uid://te0v7sv8uk8u" path="res://textures/menu/versusDevice.png" id="5_kxrwf"]
+[ext_resource type="Texture2D" uid="uid://bwqwkfy27ttu3" path="res://textures/menu/versusOnline.png" id="6_64ckk"]
+[ext_resource type="Texture2D" uid="uid://d5sf8n5b050g" path="res://textures/menu/exit.png" id="7_ak3v2"]
+[ext_resource type="Texture2D" uid="uid://dvnl4yiifhb1f" path="res://textures/menu/settings.png" id="8_koieg"]
+
+[node name="playMenu" type="Node2D" unique_id=218916968]
+texture_filter = 1
+script = ExtResource("1_qj7as")
+
+[node name="background" type="TextureRect" parent="." unique_id=1064814161]
+offset_right = 320.0
+offset_bottom = 180.0
+texture = ExtResource("2_dy7ji")
+
+[node name="title" type="TextureRect" parent="." unique_id=2102012917]
+offset_left = 94.0
+offset_top = 10.0
+offset_right = 160.0
+offset_bottom = 34.0
+scale = Vector2(2, 2)
+texture = ExtResource("3_nw378")
+expand_mode = 1
+stretch_mode = 2
+
+[node name="couchVersus" type="TextureButton" parent="." unique_id=1334792383]
+offset_left = 170.0
+offset_top = 90.0
+offset_right = 201.0
+offset_bottom = 98.0
+scale = Vector2(2, 2)
+texture_normal = ExtResource("4_knuh4")
+
+[node name="couchDevice" type="TextureButton" parent="." unique_id=1441946657]
+offset_left = 129.0
+offset_top = 116.0
+offset_right = 160.0
+offset_bottom = 124.0
+scale = Vector2(2, 2)
+texture_normal = ExtResource("5_kxrwf")
+
+[node name="onlineVersus" type="TextureButton" parent="." unique_id=1163359501]
+offset_left = 88.0
+offset_top = 90.0
+offset_right = 119.0
+offset_bottom = 98.0
+scale = Vector2(2, 2)
+texture_normal = ExtResource("6_64ckk")
+
+[node name="exit" type="TextureButton" parent="." unique_id=956040671]
+offset_left = 50.0
+offset_top = 10.0
+offset_right = 62.0
+offset_bottom = 22.0
+scale = Vector2(2, 2)
+texture_normal = ExtResource("7_ak3v2")
+
+[node name="options" type="TextureButton" parent="." unique_id=2069524635]
+offset_left = 246.0
+offset_top = 10.0
+offset_right = 258.0
+offset_bottom = 22.0
+scale = Vector2(2, 2)
+texture_normal = ExtResource("8_koieg")
+
+[connection signal="pressed" from="couchDevice" to="." method="_on_couch_device_pressed"]
+[connection signal="pressed" from="exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="options" to="." method="_on_options_pressed"]

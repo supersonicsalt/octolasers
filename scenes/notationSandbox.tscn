@@ -1,27 +1,27 @@
-[gd_scene load_steps=11 format=3 uid="uid://de2h46u4bnv3y"]
+[gd_scene format=3 uid="uid://de2h46u4bnv3y"]
 
-[ext_resource type="Script" uid="uid://dk0233py8sabj" path="res://scripts/notationSandbox.gd" id="1_et8iy"]
+[ext_resource type="Script" uid="uid://dk0233py8sabj" path="res://scenes/scripts/notationSandbox.gd" id="1_et8iy"]
 [ext_resource type="Texture2D" uid="uid://dldufaeejm5ls" path="res://textures/menu/temp menu/background.png" id="2_cwa57"]
-[ext_resource type="TileSet" uid="uid://dwu2d4uw1j60f" path="res://tileset/boardTiles.tres" id="3_wbpig"]
-[ext_resource type="Script" uid="uid://3iya16mys85e" path="res://scripts/board_tiles_notation.gd" id="4_a2xd8"]
-[ext_resource type="TileSet" uid="uid://c6cg8y31lsngs" path="res://tileset/laserTiles.tres" id="5_et8iy"]
+[ext_resource type="TileSet" uid="uid://dwu2d4uw1j60f" path="res://textures/tileset/boardTiles.tres" id="3_wbpig"]
+[ext_resource type="Script" uid="uid://3iya16mys85e" path="res://scenes/scripts/board_tiles_notation.gd" id="4_a2xd8"]
+[ext_resource type="TileSet" uid="uid://c6cg8y31lsngs" path="res://textures/tileset/laserTiles.tres" id="5_et8iy"]
 [ext_resource type="Texture2D" uid="uid://snnwpuiofvk2" path="res://textures/menu/selectPencil.png" id="6_5mvsv"]
 [ext_resource type="Texture2D" uid="uid://3fhl3bh0uto2" path="res://textures/menu/customizePencil.png" id="6_aerid"]
 [ext_resource type="Texture2D" uid="uid://cndsisadkfowa" path="res://textures/menu/clearAll.png" id="6_cwa57"]
-[ext_resource type="Script" uid="uid://joq5alv4pbpb" path="res://scripts/item_list.gd" id="6_dajgj"]
+[ext_resource type="Script" uid="uid://joq5alv4pbpb" path="res://scenes/scripts/item_list.gd" id="6_dajgj"]
 [ext_resource type="Texture2D" uid="uid://d5sf8n5b050g" path="res://textures/menu/exit.png" id="9_mbdul"]
 
-[node name="notationSandbox" type="Node2D"]
+[node name="notationSandbox" type="Node2D" unique_id=1028914692]
 texture_filter = 1
 script = ExtResource("1_et8iy")
 
-[node name="background" type="TextureRect" parent="."]
+[node name="background" type="TextureRect" parent="." unique_id=1693667755]
 texture_filter = 1
 offset_right = 320.0
 offset_bottom = 180.0
 texture = ExtResource("2_cwa57")
 
-[node name="tileMaps" type="Control" parent="."]
+[node name="tileMaps" type="Control" parent="." unique_id=427882938]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 34.0
@@ -29,62 +29,61 @@ offset_top = 50.0
 offset_right = 238.0
 offset_bottom = 169.0
 
-[node name="BoardTiles" type="TileMapLayer" parent="tileMaps"]
+[node name="BoardTiles" type="TileMapLayer" parent="tileMaps" unique_id=1374266874]
 texture_filter = 1
 position = Vector2(102, 60)
 tile_set = ExtResource("3_wbpig")
 script = ExtResource("4_a2xd8")
 
-[node name="coloredLaser1" type="TileMapLayer" parent="tileMaps/BoardTiles"]
+[node name="coloredLaser1" type="TileMapLayer" parent="tileMaps/BoardTiles" unique_id=547331758]
 tile_set = ExtResource("5_et8iy")
 
-[node name="coloredLaser2" type="TileMapLayer" parent="tileMaps/BoardTiles"]
+[node name="coloredLaser2" type="TileMapLayer" parent="tileMaps/BoardTiles" unique_id=309071433]
 tile_set = ExtResource("5_et8iy")
 
-[node name="coloredLaser3" type="TileMapLayer" parent="tileMaps/BoardTiles"]
+[node name="coloredLaser3" type="TileMapLayer" parent="tileMaps/BoardTiles" unique_id=1606000914]
 tile_set = ExtResource("5_et8iy")
 
-[node name="coloredLaser4" type="TileMapLayer" parent="tileMaps/BoardTiles"]
+[node name="coloredLaser4" type="TileMapLayer" parent="tileMaps/BoardTiles" unique_id=241565539]
 tile_set = ExtResource("5_et8iy")
 
-[node name="coloredLaser5" type="TileMapLayer" parent="tileMaps/BoardTiles"]
+[node name="coloredLaser5" type="TileMapLayer" parent="tileMaps/BoardTiles" unique_id=1340902034]
 tile_set = ExtResource("5_et8iy")
 
-[node name="coloredLaser6" type="TileMapLayer" parent="tileMaps/BoardTiles"]
+[node name="coloredLaser6" type="TileMapLayer" parent="tileMaps/BoardTiles" unique_id=2070917400]
 tile_set = ExtResource("5_et8iy")
 
-[node name="coloredLaser7" type="TileMapLayer" parent="tileMaps/BoardTiles"]
+[node name="coloredLaser7" type="TileMapLayer" parent="tileMaps/BoardTiles" unique_id=1790589841]
 tile_set = ExtResource("5_et8iy")
 
-[node name="coloredLaser8" type="TileMapLayer" parent="tileMaps/BoardTiles"]
+[node name="coloredLaser8" type="TileMapLayer" parent="tileMaps/BoardTiles" unique_id=2073360981]
 tile_set = ExtResource("5_et8iy")
 
-[node name="coloredLaser9" type="TileMapLayer" parent="tileMaps/BoardTiles"]
+[node name="coloredLaser9" type="TileMapLayer" parent="tileMaps/BoardTiles" unique_id=1650046374]
 tile_set = ExtResource("5_et8iy")
 
-[node name="coloredLaser10" type="TileMapLayer" parent="tileMaps/BoardTiles"]
+[node name="coloredLaser10" type="TileMapLayer" parent="tileMaps/BoardTiles" unique_id=788013159]
 tile_set = ExtResource("5_et8iy")
 
-[node name="coloredLaser11" type="TileMapLayer" parent="tileMaps/BoardTiles"]
+[node name="coloredLaser11" type="TileMapLayer" parent="tileMaps/BoardTiles" unique_id=1604787517]
 tile_set = ExtResource("5_et8iy")
 
-[node name="coloredLaser12" type="TileMapLayer" parent="tileMaps/BoardTiles"]
+[node name="coloredLaser12" type="TileMapLayer" parent="tileMaps/BoardTiles" unique_id=566012436]
 tile_set = ExtResource("5_et8iy")
 
-[node name="coloredLaser13" type="TileMapLayer" parent="tileMaps/BoardTiles"]
+[node name="coloredLaser13" type="TileMapLayer" parent="tileMaps/BoardTiles" unique_id=1878262536]
 tile_set = ExtResource("5_et8iy")
 
-[node name="coloredLaser14" type="TileMapLayer" parent="tileMaps/BoardTiles"]
+[node name="coloredLaser14" type="TileMapLayer" parent="tileMaps/BoardTiles" unique_id=515181685]
 tile_set = ExtResource("5_et8iy")
 
-[node name="coloredLaser15" type="TileMapLayer" parent="tileMaps/BoardTiles"]
+[node name="coloredLaser15" type="TileMapLayer" parent="tileMaps/BoardTiles" unique_id=1833516863]
 tile_set = ExtResource("5_et8iy")
 
-[node name="coloredLaser16" type="TileMapLayer" parent="tileMaps/BoardTiles"]
+[node name="coloredLaser16" type="TileMapLayer" parent="tileMaps/BoardTiles" unique_id=2060750547]
 tile_set = ExtResource("5_et8iy")
 
-[node name="heightText" type="TextEdit" parent="."]
-clip_contents = false
+[node name="heightText" type="TextEdit" parent="." unique_id=1093333278]
 offset_left = 10.0
 offset_top = 10.0
 offset_right = 80.0
@@ -94,8 +93,7 @@ tooltip_text = "height"
 text = "height"
 editable = false
 
-[node name="heightInput" type="TextEdit" parent="."]
-clip_contents = false
+[node name="heightInput" type="TextEdit" parent="." unique_id=1567849607]
 offset_left = 45.0
 offset_top = 10.0
 offset_right = 95.0
@@ -103,8 +101,7 @@ offset_bottom = 50.0
 scale = Vector2(0.5, 0.5)
 tooltip_text = "height"
 
-[node name="widthText" type="TextEdit" parent="."]
-clip_contents = false
+[node name="widthText" type="TextEdit" parent="." unique_id=931041937]
 offset_left = 10.0
 offset_top = 30.0
 offset_right = 80.0
@@ -114,8 +111,7 @@ tooltip_text = "height"
 text = "width"
 editable = false
 
-[node name="widthInput" type="TextEdit" parent="."]
-clip_contents = false
+[node name="widthInput" type="TextEdit" parent="." unique_id=1248437628]
 offset_left = 45.0
 offset_top = 30.0
 offset_right = 95.0
@@ -123,7 +119,7 @@ offset_bottom = 70.0
 scale = Vector2(0.5, 0.5)
 tooltip_text = "height"
 
-[node name="clearAll" type="TextureButton" parent="."]
+[node name="clearAll" type="TextureButton" parent="." unique_id=1228169745]
 offset_left = 10.0
 offset_top = 49.0
 offset_right = 22.0
@@ -131,7 +127,7 @@ offset_bottom = 61.0
 scale = Vector2(2, 2)
 texture_normal = ExtResource("6_cwa57")
 
-[node name="logText" type="TextEdit" parent="."]
+[node name="logText" type="TextEdit" parent="." unique_id=143472619]
 offset_left = 238.0
 offset_top = 61.0
 offset_right = 408.0
@@ -140,7 +136,7 @@ scale = Vector2(0.4, 0.4)
 editable = false
 wrap_mode = 1
 
-[node name="exit" type="TextureButton" parent="."]
+[node name="exit" type="TextureButton" parent="." unique_id=1753735620]
 offset_left = 10.0
 offset_top = 146.0
 offset_right = 22.0
@@ -148,19 +144,19 @@ offset_bottom = 158.0
 scale = Vector2(2, 2)
 texture_normal = ExtResource("9_mbdul")
 
-[node name="itemList" type="ItemList" parent="."]
+[node name="itemList" type="ItemList" parent="." unique_id=1196818525]
 offset_left = 71.0
 offset_top = 10.0
 offset_right = 237.0
 offset_bottom = 50.0
 script = ExtResource("6_dajgj")
 
-[node name="colorSquare1" type="ColorRect" parent="itemList"]
+[node name="colorSquare1" type="ColorRect" parent="itemList" unique_id=824633938]
 layout_mode = 0
 offset_right = 20.0
 offset_bottom = 20.0
 
-[node name="selectRect" type="TextureRect" parent="itemList/colorSquare1"]
+[node name="selectRect" type="TextureRect" parent="itemList/colorSquare1" unique_id=1783474060]
 visible = false
 self_modulate = Color(1, 1, 1, 0.5)
 layout_mode = 0
@@ -168,14 +164,14 @@ offset_right = 20.0
 offset_bottom = 20.0
 texture = ExtResource("6_5mvsv")
 
-[node name="colorSquare2" type="ColorRect" parent="itemList"]
+[node name="colorSquare2" type="ColorRect" parent="itemList" unique_id=62247496]
 layout_mode = 0
 offset_top = 20.0
 offset_right = 20.0
 offset_bottom = 40.0
 color = Color(1, 1, 0, 1)
 
-[node name="selectRect" type="TextureRect" parent="itemList/colorSquare2"]
+[node name="selectRect" type="TextureRect" parent="itemList/colorSquare2" unique_id=1691707246]
 visible = false
 self_modulate = Color(1, 1, 1, 0.5)
 layout_mode = 0
@@ -183,14 +179,14 @@ offset_right = 20.0
 offset_bottom = 20.0
 texture = ExtResource("6_5mvsv")
 
-[node name="colorSquare3" type="ColorRect" parent="itemList"]
+[node name="colorSquare3" type="ColorRect" parent="itemList" unique_id=1229767100]
 layout_mode = 0
 offset_left = 20.0
 offset_right = 40.0
 offset_bottom = 20.0
 color = Color(1, 0, 1, 1)
 
-[node name="selectRect" type="TextureRect" parent="itemList/colorSquare3"]
+[node name="selectRect" type="TextureRect" parent="itemList/colorSquare3" unique_id=685139306]
 visible = false
 self_modulate = Color(1, 1, 1, 0.5)
 layout_mode = 0
@@ -198,7 +194,7 @@ offset_right = 20.0
 offset_bottom = 20.0
 texture = ExtResource("6_5mvsv")
 
-[node name="colorSquare4" type="ColorRect" parent="itemList"]
+[node name="colorSquare4" type="ColorRect" parent="itemList" unique_id=899046115]
 layout_mode = 0
 offset_left = 20.0
 offset_top = 20.0
@@ -206,7 +202,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 color = Color(0, 1, 1, 1)
 
-[node name="selectRect" type="TextureRect" parent="itemList/colorSquare4"]
+[node name="selectRect" type="TextureRect" parent="itemList/colorSquare4" unique_id=275540672]
 visible = false
 self_modulate = Color(1, 1, 1, 0.5)
 layout_mode = 0
@@ -214,14 +210,14 @@ offset_right = 20.0
 offset_bottom = 20.0
 texture = ExtResource("6_5mvsv")
 
-[node name="colorSquare5" type="ColorRect" parent="itemList"]
+[node name="colorSquare5" type="ColorRect" parent="itemList" unique_id=1174730128]
 layout_mode = 0
 offset_left = 40.0
 offset_right = 60.0
 offset_bottom = 20.0
 color = Color(0, 0, 1, 1)
 
-[node name="selectRect" type="TextureRect" parent="itemList/colorSquare5"]
+[node name="selectRect" type="TextureRect" parent="itemList/colorSquare5" unique_id=164850377]
 visible = false
 self_modulate = Color(1, 1, 1, 0.5)
 layout_mode = 0
@@ -229,7 +225,7 @@ offset_right = 20.0
 offset_bottom = 20.0
 texture = ExtResource("6_5mvsv")
 
-[node name="colorSquare6" type="ColorRect" parent="itemList"]
+[node name="colorSquare6" type="ColorRect" parent="itemList" unique_id=398559386]
 layout_mode = 0
 offset_left = 40.0
 offset_top = 20.0
@@ -237,7 +233,7 @@ offset_right = 60.0
 offset_bottom = 40.0
 color = Color(0, 1, 0, 1)
 
-[node name="selectRect" type="TextureRect" parent="itemList/colorSquare6"]
+[node name="selectRect" type="TextureRect" parent="itemList/colorSquare6" unique_id=1948333769]
 visible = false
 self_modulate = Color(1, 1, 1, 0.5)
 layout_mode = 0
@@ -245,14 +241,14 @@ offset_right = 20.0
 offset_bottom = 20.0
 texture = ExtResource("6_5mvsv")
 
-[node name="colorSquare7" type="ColorRect" parent="itemList"]
+[node name="colorSquare7" type="ColorRect" parent="itemList" unique_id=1345197136]
 layout_mode = 0
 offset_left = 60.0
 offset_right = 80.0
 offset_bottom = 20.0
 color = Color(1, 0, 0, 1)
 
-[node name="selectRect" type="TextureRect" parent="itemList/colorSquare7"]
+[node name="selectRect" type="TextureRect" parent="itemList/colorSquare7" unique_id=1880179185]
 visible = false
 self_modulate = Color(1, 1, 1, 0.5)
 layout_mode = 0
@@ -260,7 +256,7 @@ offset_right = 20.0
 offset_bottom = 20.0
 texture = ExtResource("6_5mvsv")
 
-[node name="colorSquare8" type="ColorRect" parent="itemList"]
+[node name="colorSquare8" type="ColorRect" parent="itemList" unique_id=1670022348]
 layout_mode = 0
 offset_left = 60.0
 offset_top = 20.0
@@ -268,7 +264,7 @@ offset_right = 80.0
 offset_bottom = 40.0
 color = Color(0, 0, 0, 1)
 
-[node name="selectRect" type="TextureRect" parent="itemList/colorSquare8"]
+[node name="selectRect" type="TextureRect" parent="itemList/colorSquare8" unique_id=1723097801]
 visible = false
 self_modulate = Color(1, 1, 1, 0.5)
 layout_mode = 0
@@ -276,14 +272,14 @@ offset_right = 20.0
 offset_bottom = 20.0
 texture = ExtResource("6_5mvsv")
 
-[node name="colorSquare9" type="ColorRect" parent="itemList"]
+[node name="colorSquare9" type="ColorRect" parent="itemList" unique_id=2111713410]
 layout_mode = 0
 offset_left = 80.0
 offset_right = 100.0
 offset_bottom = 20.0
 color = Color(1, 0.498039, 0, 1)
 
-[node name="selectRect" type="TextureRect" parent="itemList/colorSquare9"]
+[node name="selectRect" type="TextureRect" parent="itemList/colorSquare9" unique_id=1035225160]
 visible = false
 self_modulate = Color(1, 1, 1, 0.5)
 layout_mode = 0
@@ -291,7 +287,7 @@ offset_right = 20.0
 offset_bottom = 20.0
 texture = ExtResource("6_5mvsv")
 
-[node name="colorSquare10" type="ColorRect" parent="itemList"]
+[node name="colorSquare10" type="ColorRect" parent="itemList" unique_id=819236070]
 layout_mode = 0
 offset_left = 80.0
 offset_top = 20.0
@@ -299,7 +295,7 @@ offset_right = 100.0
 offset_bottom = 40.0
 color = Color(0, 0.498039, 1, 1)
 
-[node name="selectRect" type="TextureRect" parent="itemList/colorSquare10"]
+[node name="selectRect" type="TextureRect" parent="itemList/colorSquare10" unique_id=1574720583]
 visible = false
 self_modulate = Color(1, 1, 1, 0.5)
 layout_mode = 0
@@ -307,14 +303,14 @@ offset_right = 20.0
 offset_bottom = 20.0
 texture = ExtResource("6_5mvsv")
 
-[node name="colorSquare11" type="ColorRect" parent="itemList"]
+[node name="colorSquare11" type="ColorRect" parent="itemList" unique_id=757882526]
 layout_mode = 0
 offset_left = 100.0
 offset_right = 120.0
 offset_bottom = 20.0
 color = Color(0.498039, 0, 1, 1)
 
-[node name="selectRect" type="TextureRect" parent="itemList/colorSquare11"]
+[node name="selectRect" type="TextureRect" parent="itemList/colorSquare11" unique_id=1098754417]
 visible = false
 self_modulate = Color(1, 1, 1, 0.5)
 layout_mode = 0
@@ -322,7 +318,7 @@ offset_right = 20.0
 offset_bottom = 20.0
 texture = ExtResource("6_5mvsv")
 
-[node name="colorSquare12" type="ColorRect" parent="itemList"]
+[node name="colorSquare12" type="ColorRect" parent="itemList" unique_id=1559053922]
 layout_mode = 0
 offset_left = 100.0
 offset_top = 20.0
@@ -330,7 +326,7 @@ offset_right = 120.0
 offset_bottom = 40.0
 color = Color(1, 0, 0.5, 1)
 
-[node name="selectRect" type="TextureRect" parent="itemList/colorSquare12"]
+[node name="selectRect" type="TextureRect" parent="itemList/colorSquare12" unique_id=354872581]
 visible = false
 self_modulate = Color(1, 1, 1, 0.5)
 layout_mode = 0
@@ -338,14 +334,14 @@ offset_right = 20.0
 offset_bottom = 20.0
 texture = ExtResource("6_5mvsv")
 
-[node name="colorSquare13" type="ColorRect" parent="itemList"]
+[node name="colorSquare13" type="ColorRect" parent="itemList" unique_id=1895611645]
 layout_mode = 0
 offset_left = 120.0
 offset_right = 140.0
 offset_bottom = 20.0
 color = Color(0.5, 0.5, 0.5, 1)
 
-[node name="selectRect" type="TextureRect" parent="itemList/colorSquare13"]
+[node name="selectRect" type="TextureRect" parent="itemList/colorSquare13" unique_id=1516824450]
 visible = false
 self_modulate = Color(1, 1, 1, 0.5)
 z_index = 1
@@ -354,13 +350,13 @@ offset_right = 20.0
 offset_bottom = 20.0
 texture = ExtResource("6_5mvsv")
 
-[node name="customizeRect" type="TextureRect" parent="itemList/colorSquare13"]
+[node name="customizeRect" type="TextureRect" parent="itemList/colorSquare13" unique_id=71195639]
 layout_mode = 0
 offset_right = 20.0
 offset_bottom = 20.0
 texture = ExtResource("6_aerid")
 
-[node name="colorSquare14" type="ColorRect" parent="itemList"]
+[node name="colorSquare14" type="ColorRect" parent="itemList" unique_id=852448775]
 layout_mode = 0
 offset_left = 120.0
 offset_top = 20.0
@@ -368,7 +364,7 @@ offset_right = 140.0
 offset_bottom = 40.0
 color = Color(0.498039, 0.498039, 0.498039, 1)
 
-[node name="selectRect" type="TextureRect" parent="itemList/colorSquare14"]
+[node name="selectRect" type="TextureRect" parent="itemList/colorSquare14" unique_id=651727890]
 visible = false
 self_modulate = Color(1, 1, 1, 0.5)
 z_index = 1
@@ -377,20 +373,20 @@ offset_right = 20.0
 offset_bottom = 20.0
 texture = ExtResource("6_5mvsv")
 
-[node name="customizeRect" type="TextureRect" parent="itemList/colorSquare14"]
+[node name="customizeRect" type="TextureRect" parent="itemList/colorSquare14" unique_id=2044055099]
 layout_mode = 0
 offset_right = 20.0
 offset_bottom = 20.0
 texture = ExtResource("6_aerid")
 
-[node name="colorSquare15" type="ColorRect" parent="itemList"]
+[node name="colorSquare15" type="ColorRect" parent="itemList" unique_id=819064982]
 layout_mode = 0
 offset_left = 140.0
 offset_right = 160.0
 offset_bottom = 20.0
 color = Color(0.498039, 0.498039, 0.498039, 1)
 
-[node name="selectRect" type="TextureRect" parent="itemList/colorSquare15"]
+[node name="selectRect" type="TextureRect" parent="itemList/colorSquare15" unique_id=107177360]
 visible = false
 self_modulate = Color(1, 1, 1, 0.5)
 z_index = 1
@@ -399,13 +395,13 @@ offset_right = 20.0
 offset_bottom = 20.0
 texture = ExtResource("6_5mvsv")
 
-[node name="customizeRect" type="TextureRect" parent="itemList/colorSquare15"]
+[node name="customizeRect" type="TextureRect" parent="itemList/colorSquare15" unique_id=658622140]
 layout_mode = 0
 offset_right = 20.0
 offset_bottom = 20.0
 texture = ExtResource("6_aerid")
 
-[node name="colorSquare16" type="ColorRect" parent="itemList"]
+[node name="colorSquare16" type="ColorRect" parent="itemList" unique_id=2006433914]
 layout_mode = 0
 offset_left = 140.0
 offset_top = 20.0
@@ -413,7 +409,7 @@ offset_right = 160.0
 offset_bottom = 40.0
 color = Color(0.498039, 0.498039, 0.498039, 1)
 
-[node name="selectRect" type="TextureRect" parent="itemList/colorSquare16"]
+[node name="selectRect" type="TextureRect" parent="itemList/colorSquare16" unique_id=704402604]
 visible = false
 self_modulate = Color(1, 1, 1, 0.5)
 z_index = 1
@@ -422,13 +418,13 @@ offset_right = 20.0
 offset_bottom = 20.0
 texture = ExtResource("6_5mvsv")
 
-[node name="customizeRect" type="TextureRect" parent="itemList/colorSquare16"]
+[node name="customizeRect" type="TextureRect" parent="itemList/colorSquare16" unique_id=793295652]
 layout_mode = 0
 offset_right = 20.0
 offset_bottom = 20.0
 texture = ExtResource("6_aerid")
 
-[node name="colorPicker" type="ColorPicker" parent="."]
+[node name="colorPicker" type="ColorPicker" parent="." unique_id=1033865433]
 offset_left = 238.0
 offset_top = 9.99999
 offset_right = 677.0

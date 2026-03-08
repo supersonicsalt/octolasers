@@ -8,17 +8,21 @@
 
 config_version=5
 
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
 [application]
 
 config/name="octolasers"
 config/version="0.0.notationUpdate.1"
-run/main_scene="res://scenes/menu.tscn"
-config/features=PackedStringArray("4.5", "GL Compatibility")
+run/main_scene="res://scenes/menus/menu.tscn"
+config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
 
-GlobalSelected="*res://scripts/item_list.gd"
+GlobalSceneManager="*uid://w02fg6yvyv4v"
 
 [debug]
 

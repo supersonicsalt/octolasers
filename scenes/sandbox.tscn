@@ -1,26 +1,26 @@
-[gd_scene load_steps=10 format=3 uid="uid://dmkju30weks2l"]
+[gd_scene format=3 uid="uid://dmkju30weks2l"]
 
-[ext_resource type="Script" uid="uid://bujysgrw0cltg" path="res://scripts/sandbox.gd" id="1_hoad6"]
+[ext_resource type="Script" uid="uid://bujysgrw0cltg" path="res://scenes/scripts/sandbox.gd" id="1_hoad6"]
 [ext_resource type="Texture2D" uid="uid://dldufaeejm5ls" path="res://textures/menu/temp menu/background.png" id="1_j0qm7"]
-[ext_resource type="TileSet" uid="uid://dwu2d4uw1j60f" path="res://tileset/boardTiles.tres" id="2_jn5yb"]
-[ext_resource type="Script" uid="uid://3in0vx5okame" path="res://scripts/board_interaction.gd" id="3_dkeaa"]
-[ext_resource type="TileSet" uid="uid://oja1d7v6vtdw" path="res://tileset/octodotsTiles.tres" id="3_kf0dj"]
-[ext_resource type="Script" uid="uid://dof7pcwsoax2c" path="res://scripts/octodot_interaction.gd" id="5_swjod"]
-[ext_resource type="TileSet" uid="uid://c6cg8y31lsngs" path="res://tileset/laserTiles.tres" id="6_3eikl"]
-[ext_resource type="Script" uid="uid://dpuwjh7ql3rxo" path="res://scripts/laser_interaction.gd" id="7_yoyod"]
+[ext_resource type="TileSet" uid="uid://dwu2d4uw1j60f" path="res://textures/tileset/boardTiles.tres" id="2_jn5yb"]
+[ext_resource type="Script" uid="uid://3in0vx5okame" path="res://scenes/scripts/board_interaction.gd" id="3_dkeaa"]
+[ext_resource type="TileSet" uid="uid://oja1d7v6vtdw" path="res://textures/tileset/octodotsTiles.tres" id="3_kf0dj"]
+[ext_resource type="Script" uid="uid://dof7pcwsoax2c" path="res://scenes/scripts/octodot_interaction.gd" id="5_swjod"]
+[ext_resource type="TileSet" uid="uid://c6cg8y31lsngs" path="res://textures/tileset/laserTiles.tres" id="6_3eikl"]
+[ext_resource type="Script" uid="uid://dpuwjh7ql3rxo" path="res://scenes/scripts/laser_interaction.gd" id="7_yoyod"]
 [ext_resource type="Texture2D" uid="uid://d5sf8n5b050g" path="res://textures/menu/exit.png" id="10_nbrlj"]
 
-[node name="sandbox" type="Node2D"]
+[node name="sandbox" type="Node2D" unique_id=1407071664]
 texture_filter = 1
 script = ExtResource("1_hoad6")
 
-[node name="background" type="TextureRect" parent="."]
+[node name="background" type="TextureRect" parent="." unique_id=179362632]
 texture_filter = 1
 offset_right = 320.0
 offset_bottom = 180.0
 texture = ExtResource("1_j0qm7")
 
-[node name="tileMaps" type="Control" parent="."]
+[node name="tileMaps" type="Control" parent="." unique_id=541436403]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 34.0
@@ -28,25 +28,24 @@ offset_top = 49.0
 offset_right = 238.0
 offset_bottom = 169.0
 
-[node name="BoardTiles" type="TileMapLayer" parent="tileMaps"]
+[node name="BoardTiles" type="TileMapLayer" parent="tileMaps" unique_id=1484356636]
 texture_filter = 1
 position = Vector2(102, 60)
 tile_set = ExtResource("2_jn5yb")
 script = ExtResource("3_dkeaa")
 
-[node name="OctodotTiles" type="TileMapLayer" parent="tileMaps"]
+[node name="OctodotTiles" type="TileMapLayer" parent="tileMaps" unique_id=1769852858]
 texture_filter = 1
 position = Vector2(102, 60)
 tile_set = ExtResource("3_kf0dj")
 script = ExtResource("5_swjod")
 
-[node name="LaserTiles" type="TileMapLayer" parent="tileMaps"]
+[node name="LaserTiles" type="TileMapLayer" parent="tileMaps" unique_id=438123578]
 position = Vector2(102, 60)
 tile_set = ExtResource("6_3eikl")
 script = ExtResource("7_yoyod")
 
-[node name="heightText" type="TextEdit" parent="."]
-clip_contents = false
+[node name="heightText" type="TextEdit" parent="." unique_id=255976035]
 offset_left = 10.0
 offset_top = 10.0
 offset_right = 80.0
@@ -56,8 +55,7 @@ tooltip_text = "height"
 text = "height"
 editable = false
 
-[node name="heightInput" type="TextEdit" parent="."]
-clip_contents = false
+[node name="heightInput" type="TextEdit" parent="." unique_id=1062129176]
 offset_left = 45.0
 offset_top = 10.0
 offset_right = 95.0
@@ -65,8 +63,7 @@ offset_bottom = 50.0
 scale = Vector2(0.5, 0.5)
 tooltip_text = "height"
 
-[node name="widthText" type="TextEdit" parent="."]
-clip_contents = false
+[node name="widthText" type="TextEdit" parent="." unique_id=690605537]
 offset_left = 10.0
 offset_top = 30.0
 offset_right = 80.0
@@ -76,8 +73,7 @@ tooltip_text = "height"
 text = "width"
 editable = false
 
-[node name="widthInput" type="TextEdit" parent="."]
-clip_contents = false
+[node name="widthInput" type="TextEdit" parent="." unique_id=850251636]
 offset_left = 45.0
 offset_top = 30.0
 offset_right = 95.0
@@ -85,7 +81,7 @@ offset_bottom = 70.0
 scale = Vector2(0.5, 0.5)
 tooltip_text = "height"
 
-[node name="logText" type="TextEdit" parent="."]
+[node name="logText" type="TextEdit" parent="." unique_id=1618459401]
 offset_left = 238.0
 offset_top = 10.0
 offset_right = 438.0
@@ -94,7 +90,7 @@ scale = Vector2(0.4, 0.4)
 editable = false
 wrap_mode = 1
 
-[node name="exit" type="TextureButton" parent="."]
+[node name="exit" type="TextureButton" parent="." unique_id=209674632]
 offset_left = 10.0
 offset_top = 146.0
 offset_right = 22.0

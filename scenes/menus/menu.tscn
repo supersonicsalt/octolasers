@@ -1,0 +1,91 @@
+[gd_scene format=3 uid="uid://debubx8b778lg"]
+
+[ext_resource type="Script" uid="uid://b4xs56ctl83j5" path="res://scenes/menus/menu.gd" id="1_qh50l"]
+[ext_resource type="Texture2D" uid="uid://dldufaeejm5ls" path="res://textures/menu/temp menu/background.png" id="2_ra27y"]
+[ext_resource type="Texture2D" uid="uid://d0i7ooo41r8s2" path="res://textures/menu/title.png" id="3_3lt0k"]
+[ext_resource type="Texture2D" uid="uid://d5sf8n5b050g" path="res://textures/menu/exit.png" id="4_ku68b"]
+[ext_resource type="Texture2D" uid="uid://cahswi3ehgv6f" path="res://textures/menu/puzzle.png" id="5_x8t52"]
+[ext_resource type="Texture2D" uid="uid://uv3tj7otrrmb" path="res://textures/menu/sandbox.png" id="6_awo5j"]
+[ext_resource type="Texture2D" uid="uid://dvnl4yiifhb1f" path="res://textures/menu/settings.png" id="7_6o6h3"]
+[ext_resource type="Texture2D" uid="uid://d3d6vfoc6ohc3" path="res://textures/menu/story.png" id="8_anbs1"]
+[ext_resource type="Texture2D" uid="uid://d2qsi2ju5t7ty" path="res://textures/empty.png" id="9_c6ub5"]
+[ext_resource type="Texture2D" uid="uid://dtd4cqoy66h2v" path="res://textures/menu/versus.png" id="10_dlt8b"]
+
+[node name="menu" type="Node2D" unique_id=454124739 node_paths=PackedStringArray("button_to_scene")]
+texture_filter = 1
+script = ExtResource("1_qh50l")
+button_to_scene = {
+NodePath("puzzleMenu"): "puzzleMenu"
+}
+
+[node name="background" type="TextureRect" parent="." unique_id=1003789050]
+offset_right = 320.0
+offset_bottom = 180.0
+texture = ExtResource("2_ra27y")
+
+[node name="title" type="TextureRect" parent="." unique_id=2004090463]
+offset_left = 94.0
+offset_top = 10.0
+offset_right = 160.0
+offset_bottom = 34.0
+scale = Vector2(2, 2)
+texture = ExtResource("3_3lt0k")
+expand_mode = 1
+stretch_mode = 2
+
+[node name="exit" type="TextureButton" parent="." unique_id=1831284765]
+offset_left = 50.0
+offset_top = 10.0
+offset_right = 62.0
+offset_bottom = 22.0
+scale = Vector2(2, 2)
+texture_normal = ExtResource("4_ku68b")
+
+[node name="puzzleMenu" type="TextureButton" parent="." unique_id=1333243755]
+offset_left = 179.0
+offset_top = 99.0
+offset_right = 191.0
+offset_bottom = 111.0
+scale = Vector2(2, 2)
+texture_normal = ExtResource("5_x8t52")
+
+[node name="sandboxMenu" type="TextureButton" parent="." unique_id=896625521]
+offset_left = 148.0
+offset_top = 126.0
+offset_right = 160.0
+offset_bottom = 138.0
+scale = Vector2(2, 2)
+texture_normal = ExtResource("6_awo5j")
+
+[node name="options" type="TextureButton" parent="." unique_id=2056228663]
+offset_left = 246.0
+offset_top = 10.0
+offset_right = 258.0
+offset_bottom = 22.0
+scale = Vector2(2, 2)
+texture_normal = ExtResource("7_6o6h3")
+
+[node name="story" type="TextureButton" parent="." unique_id=811158692]
+offset_left = 148.0
+offset_top = 68.0
+offset_right = 160.0
+offset_bottom = 80.0
+scale = Vector2(2, 2)
+disabled = true
+texture_normal = ExtResource("8_anbs1")
+texture_disabled = ExtResource("9_c6ub5")
+
+[node name="versus" type="TextureButton" parent="." unique_id=37810024]
+offset_left = 119.0
+offset_top = 97.0
+offset_right = 131.0
+offset_bottom = 109.0
+scale = Vector2(2, 2)
+texture_normal = ExtResource("10_dlt8b")
+
+[connection signal="pressed" from="exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="puzzleMenu" to="." method="_on_puzzle_pressed"]
+[connection signal="pressed" from="sandboxMenu" to="." method="_on_sandbox_pressed"]
+[connection signal="pressed" from="options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="story" to="." method="_on_story_pressed"]
+[connection signal="pressed" from="versus" to="." method="_on_versus_pressed"]

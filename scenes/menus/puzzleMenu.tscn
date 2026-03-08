@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://cy0ttrf4b1kvk"]
+
+[ext_resource type="Script" uid="uid://b4xs56ctl83j5" path="res://scenes/menus/menu.gd" id="1_u36q7"]
+[ext_resource type="Texture2D" uid="uid://dldufaeejm5ls" path="res://textures/menu/temp menu/background.png" id="2_sq1c4"]
+[ext_resource type="Texture2D" uid="uid://d0i7ooo41r8s2" path="res://textures/menu/title.png" id="3_saut0"]
+[ext_resource type="Texture2D" uid="uid://d5sf8n5b050g" path="res://textures/menu/exit.png" id="4_dg73h"]
+[ext_resource type="Texture2D" uid="uid://dvnl4yiifhb1f" path="res://textures/menu/settings.png" id="5_0cb1a"]
+
+[node name="puzzleMenu" type="Node2D" unique_id=723751021]
+texture_filter = 1
+script = ExtResource("1_u36q7")
+
+[node name="background" type="TextureRect" parent="." unique_id=610673366]
+offset_right = 320.0
+offset_bottom = 180.0
+texture = ExtResource("2_sq1c4")
+
+[node name="title" type="TextureRect" parent="." unique_id=1564606838]
+offset_left = 94.0
+offset_top = 10.0
+offset_right = 160.0
+offset_bottom = 34.0
+scale = Vector2(2, 2)
+texture = ExtResource("3_saut0")
+expand_mode = 1
+stretch_mode = 2
+
+[node name="exit" type="TextureButton" parent="." unique_id=1205266781]
+offset_left = 50.0
+offset_top = 10.0
+offset_right = 62.0
+offset_bottom = 22.0
+scale = Vector2(2, 2)
+texture_normal = ExtResource("4_dg73h")
+
+[node name="options" type="TextureButton" parent="." unique_id=1890284146]
+offset_left = 246.0
+offset_top = 10.0
+offset_right = 258.0
+offset_bottom = 22.0
+scale = Vector2(2, 2)
+texture_normal = ExtResource("5_0cb1a")
+
+[node name="TextureButton" type="TextureButton" parent="." unique_id=1756151393]
+offset_left = 87.0
+offset_top = 82.0
+offset_right = 127.0
+offset_bottom = 122.0
+
+[node name="level" type="TextureButton" parent="." unique_id=978633046]
+offset_left = 87.0
+offset_top = 82.0
+offset_right = 127.0
+offset_bottom = 122.0
+
+[connection signal="pressed" from="exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="options" to="." method="_on_options_pressed"]

@@ -1,3 +1,4 @@
+class_name ColorsItemList
 extends ItemList
 
 var pencilSelection: int
